@@ -1,0 +1,54 @@
+<div class="widgets">
+
+  <div class="row">
+    <div >
+    <ba-card title="My Tasks" baCardClass="with-scroll table-panel">
+        <div class="horizontal-scroll">
+          <table class="table table-hover">
+            <thead>
+              <tr class="black-muted-bg">
+                <th><strong> Task Information</strong></th>
+                <th class="align-right"><strong>Required Assets</strong></th>
+                <th class="align-right"><strong>Status</strong></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let task of participatingTasks" class="no-top-border">
+                <td ngClass="nowrap">{{task.description}}</td>
+                <td class="align-right">{{task.assets}} </td>
+                <td class="align-right">{{task.id}} </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ba-card>
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <ba-card title="Active Tasks" baCardClass="with-scroll table-panel">
+        <div class="horizontal-scroll">
+          <table class="table table-hover">
+
+            <thead>
+              <tr class="black-muted-bg">
+                 <th><strong> Task Information</strong></th>
+                <th class="align-right"><strong>Required Assets</strong></th>
+                <th class="align-right"><strong>Status</strong></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let task of participatingTasks" class="no-top-border">
+                <td ngClass="nowrap">{{task.description}}</td>
+                <td class="align-right">{{task.assets}} </td>
+                <td class="align-right">{{task.id}} </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ba-card>
+    </div>
+  </div>
+
+</div>

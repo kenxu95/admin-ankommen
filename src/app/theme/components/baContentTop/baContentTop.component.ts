@@ -11,11 +11,23 @@ export class BaContentTop {
 
   public activePageTitle:string = '';
 
-  constructor(private _state:AppState) {
+  constructor(private _state:AppState) {}
+
+  ngOnInit(){
+
+    this._state.subscribe('notOnMenuTitle', (titleString) => {
+      if (titleString !== ''){
+        this.activePageTitle = titleString;
+      }else{
+        this._state.callSubscription('menu.activeLink');
+      }
+    });
+
     this._state.subscribe('menu.activeLink', (activeLink) => {
       if (activeLink) {
         this.activePageTitle = activeLink.title;
       }
-    });
+    }); 
   }
+
 }

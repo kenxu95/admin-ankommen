@@ -1,5 +1,5 @@
 import './app.loader.ts';
-import {Component, ViewEncapsulation} from "@angular/core";
+import {Component, ViewEncapsulation, ViewContainerRef} from "@angular/core";
 import {AppState} from "./app.state";
 import {BaThemeConfigProvider, BaThemeConfig} from "./theme";
 import {BaThemeRun} from "./theme/directives";
@@ -28,7 +28,10 @@ export class App {
 
   isMenuCollapsed:boolean = false;
 
-  constructor(private _state:AppState, private _imageLoader:BaImageLoaderService, private _spinner:BaThemeSpinner, private _config:BaThemeConfig) {
+  constructor(private _state:AppState, private _imageLoader:BaImageLoaderService, private _spinner:BaThemeSpinner, private _config:BaThemeConfig, viewContainerRef:ViewContainerRef) {
+    // Need this small hack in order to catch application roof view container ref
+    this.viewContainerRef = viewContainerRef;
+
     this._loadImages();
 
     this._state.subscribe('menu.isCollapsed', (isCollapsed) => {

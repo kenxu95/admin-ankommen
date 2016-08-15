@@ -14,6 +14,11 @@ import { disableDeprecatedForms, provideForms } from '@angular/forms';
 
 import { routes } from '../app/app.routes';
 
+// TODO: temporary backend that should be removed later
+import { XHRBackend } from '@angular/http';
+import { InMemoryBackendService, SEED_DATA } from 'angular2-in-memory-web-api';
+import { MockTasksDatabase } from '../app/pages/tasks/mocktasksdatabase';
+
 /*
  * Application Providers/Directives/Pipes
  * providers/directives/pipes that only live in our browser environment
@@ -27,7 +32,9 @@ export const APPLICATION_PROVIDERS = [
 
   ...HTTP_PROVIDERS,
 
-  { provide: LocationStrategy, useClass: HashLocationStrategy }
+  { provide: LocationStrategy, useClass: HashLocationStrategy },
+  { provide: XHRBackend, useClass: InMemoryBackendService }, //TODO REMOVE: in-mem server
+  { provide: SEED_DATA, useClass: MockTasksDatabase } // TODO REMOVE: in-mem server data
 ];
 
 export const PROVIDERS = [

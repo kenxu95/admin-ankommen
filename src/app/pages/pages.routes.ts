@@ -23,22 +23,48 @@ import {Ckeditor} from './editors/components/ckeditor/ckeditor.component';
 import {Components} from './components/components.component';
 import {TreeView} from './components/components/treeView/treeView.component';
 
+
+import {ActiveTasks} from './tasks/components/activetasks/activetasks.component';
+import {Profile} from './profile/profile.component';
+import {EditAssets} from './profile/components/editAssets/editAssets.component';
+
+
 //noinspection TypeScriptValidateTypes
-export const PagesRoutes:RouterConfig = [
+export const PagesRoutes:RouterConfig = [  
+{
+  path: 'pages',
+  component: Pages,
+  children: [
   {
-    path: 'pages',
-    component: Pages,
-    children: [
-      {
-        path: 'dashboard',
-        component: Dashboard,
-        data: {
-          menu: {
-            title: 'Dashboard',
-            icon: 'ion-android-home',
+    path: 'profile',
+    component: Profile
+  },
+  {
+    path: 'editassets',
+    component: EditAssets
+  },
+
+  {
+    path: 'dashboard',
+    component: Dashboard,
+    data: {
+      menu: {
+        title: 'Dashboard',
+        icon: 'ion-android-home',
+        selected: false,
+        expanded: false,
+        order: 0
+      }
+    }
+  },
+  {      
+    path: 'activetasks',
+    component: ActiveTasks,
+    data: {
+      menu: {
+            title: 'Active Tasks', // TODO: icon field?
             selected: false,
             expanded: false,
-            order: 0
           }
         }
       },
@@ -55,15 +81,15 @@ export const PagesRoutes:RouterConfig = [
           }
         },
         children: [
-          {
-            path: 'ckeditor',
-            component: Ckeditor,
-            data: {
-              menu: {
-                title: 'CKEditor',
-              }
+        {
+          path: 'ckeditor',
+          component: Ckeditor,
+          data: {
+            menu: {
+              title: 'CKEditor',
             }
           }
+        }
         ]
       },
       {
@@ -79,15 +105,15 @@ export const PagesRoutes:RouterConfig = [
           }
         },
         children: [
-          {
-            path: 'treeview',
-            component: TreeView,
-            data: {
-              menu: {
-                title: 'Tree View',
-              }
+        {
+          path: 'treeview',
+          component: TreeView,
+          data: {
+            menu: {
+              title: 'Tree View',
             }
           }
+        }
         ]
       },
       {
@@ -103,15 +129,15 @@ export const PagesRoutes:RouterConfig = [
           }
         },
         children: [
-          {
-            path: 'chartist-js',
-            component: ChartistJs,
-            data: {
-              menu: {
-                title: 'Chartist.Js',
-              }
+        {
+          path: 'chartist-js',
+          component: ChartistJs,
+          data: {
+            menu: {
+              title: 'Chartist.Js',
             }
           }
+        }
         ]
       },
       {
@@ -127,42 +153,42 @@ export const PagesRoutes:RouterConfig = [
           }
         },
         children: [
-          {
-            path: 'typography',
-            component: Typography,
-            data: {
-              menu: {
-                title: 'Typography',
-              }
+        {
+          path: 'typography',
+          component: Typography,
+          data: {
+            menu: {
+              title: 'Typography',
             }
-          },
-          {
-            path: 'buttons',
-            component: Buttons,
-            data: {
-              menu: {
-                title: 'Buttons',
-              }
+          }
+        },
+        {
+          path: 'buttons',
+          component: Buttons,
+          data: {
+            menu: {
+              title: 'Buttons',
             }
-          },
-          {
-            path: 'icons',
-            component: Icons,
-            data: {
-              menu: {
-                title: 'Icons',
-              }
+          }
+        },
+        {
+          path: 'icons',
+          component: Icons,
+          data: {
+            menu: {
+              title: 'Icons',
             }
-          },
-          {
-            path: 'grid',
-            component: Grid,
-            data: {
-              menu: {
-                title: 'Grid',
-              }
+          }
+        },
+        {
+          path: 'grid',
+          component: Grid,
+          data: {
+            menu: {
+              title: 'Grid',
             }
-          },
+          }
+        },
         ]
       },
       {
@@ -178,24 +204,24 @@ export const PagesRoutes:RouterConfig = [
           }
         },
         children: [
-          {
-            path: 'inputs',
-            component: Inputs,
-            data: {
-              menu: {
-                title: 'Form Inputs',
-              }
-            }
-          },
-          {
-            path: 'layouts',
-            component: Layouts,
-            data: {
-              menu: {
-                title: 'Form Layouts',
-              }
+        {
+          path: 'inputs',
+          component: Inputs,
+          data: {
+            menu: {
+              title: 'Form Inputs',
             }
           }
+        },
+        {
+          path: 'layouts',
+          component: Layouts,
+          data: {
+            menu: {
+              title: 'Form Layouts',
+            }
+          }
+        }
         ]
       },
       {
@@ -211,15 +237,15 @@ export const PagesRoutes:RouterConfig = [
           }
         },
         children: [
-          {
-            path: 'basictables',
-            component: BasicTables,
-            data: {
-              menu: {
-                title: 'Basic Tables',
-              }
+        {
+          path: 'basictables',
+          component: BasicTables,
+          data: {
+            menu: {
+              title: 'Basic Tables',
             }
           }
+        }
         ]
       },
       {
@@ -235,42 +261,42 @@ export const PagesRoutes:RouterConfig = [
           }
         },
         children: [
-          {
-            path: 'googlemaps',
-            component: GoogleMaps,
-            data: {
-              menu: {
-                title: 'Google Maps',
-              }
-            }
-          },
-          {
-            path: 'leafletmaps',
-            component: LeafletMaps,
-            data: {
-              menu: {
-                title: 'Leaflet Maps',
-              }
-            }
-          },
-          {
-            path: 'bubblemaps',
-            component: BubbleMaps,
-            data: {
-              menu: {
-                title: 'Bubble Maps',
-              }
-            }
-          },
-          {
-            path: 'linemaps',
-            component: LineMaps,
-            data: {
-              menu: {
-                title: 'Line Maps',
-              }
+        {
+          path: 'googlemaps',
+          component: GoogleMaps,
+          data: {
+            menu: {
+              title: 'Google Maps',
             }
           }
+        },
+        {
+          path: 'leafletmaps',
+          component: LeafletMaps,
+          data: {
+            menu: {
+              title: 'Leaflet Maps',
+            }
+          }
+        },
+        {
+          path: 'bubblemaps',
+          component: BubbleMaps,
+          data: {
+            menu: {
+              title: 'Bubble Maps',
+            }
+          }
+        },
+        {
+          path: 'linemaps',
+          component: LineMaps,
+          data: {
+            menu: {
+              title: 'Line Maps',
+            }
+          }
+        }
         ]
       },
       {
@@ -285,24 +311,24 @@ export const PagesRoutes:RouterConfig = [
           }
         },
         children: [
-          {
-            path: '',
-            data: {
-              menu: {
-                title: 'Login',
-                url: '#/login'
-              }
-            }
-          },
-          {
-            path: '',
-            data: {
-              menu: {
-                title: 'Register',
-                url: '#/register'
-              }
+        {
+          path: '',
+          data: {
+            menu: {
+              title: 'Login',
+              url: '#/login'
             }
           }
+        },
+        {
+          path: '',
+          data: {
+            menu: {
+              title: 'Register',
+              url: '#/register'
+            }
+          }
+        }
         ]
       },
       {
@@ -317,35 +343,35 @@ export const PagesRoutes:RouterConfig = [
           }
         },
         children: [
+        {
+          path: '',
+          data: {
+            menu: {
+              title: 'Menu Level 1.1',
+              url: '#'
+            }
+          }
+        },
+        {
+          path: '',
+          data: {
+            menu: {
+              title: 'Menu Level 1.2',
+              url: '#'
+            }
+          },
+          children: [
           {
             path: '',
             data: {
               menu: {
-                title: 'Menu Level 1.1',
+                title: 'Menu Level 1.2.1',
                 url: '#'
               }
             }
-          },
-          {
-            path: '',
-            data: {
-              menu: {
-                title: 'Menu Level 1.2',
-                url: '#'
-              }
-            },
-            children: [
-              {
-                path: '',
-                data: {
-                  menu: {
-                    title: 'Menu Level 1.2.1',
-                    url: '#'
-                  }
-                }
-              }
-            ]
           }
+          ]
+        }
         ]
       },
       {
@@ -360,6 +386,6 @@ export const PagesRoutes:RouterConfig = [
           }
         }
       }
-    ]
-  }
-];
+      ]
+    }
+    ];
