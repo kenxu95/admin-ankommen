@@ -25,7 +25,7 @@ import {layoutPaths} from "./theme/theme.constants";
   `
 })
 export class App {
-
+  viewContainerRef: ViewContainerRef;
   isMenuCollapsed:boolean = false;
 
   constructor(private _state:AppState, private _imageLoader:BaImageLoaderService, private _spinner:BaThemeSpinner, private _config:BaThemeConfig, viewContainerRef:ViewContainerRef) {

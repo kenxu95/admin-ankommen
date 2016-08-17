@@ -9,16 +9,17 @@ import { MODAL_DIRECTIVES, BS_VIEW_PROVIDERS } from 'ng2-bootstrap/ng2-bootstrap
 import { UserService } from '../tasks/user.service';
 import { Router } from '@angular/router';
 
-import {BaKameleonPicturePipe} from '../../theme/pipes';
-import {IconsService} from '../ui/components/incons/icons.service';
+import { BaKameleonPicturePipe } from '../../theme/pipes';
+import { IconsService } from '../ui/components/incons/icons.service';
 
+import { EditLocations } from './components/editLocations';
 
 @Component({
   selector: 'profile',
   template: require('./profile.component.html'),
   styles: [require('./profile.component.css'), 
            require('../ui/components/incons/icons.scss')],
-  directives: [BaCard, MODAL_DIRECTIVES],
+  directives: [BaCard, MODAL_DIRECTIVES, EditLocations],
   providers: [UserService, IconsService],
   encapsulation: ViewEncapsulation.None,
   pipes: [BaProfilePicturePipe, BaKameleonPicturePipe],
@@ -30,6 +31,9 @@ export class Profile {
   // THIS ALL NEEDS TO BE REPLACED
   mockUser: any;
   allIcons: any; 
+
+  showEditLocations: boolean = false;
+  userLocations: string[] = [];
 
   constructor(private _state:AppState,
     private _userService:UserService,
@@ -48,11 +52,23 @@ export class Profile {
       this.mockUser = mockUser;
     });
 
-    this.allIcons = this._iconsService.getAll().kameleonRoundedIcons;
+    this.allIcons = this._iconsService.getAll().kameleonIcons;
   }
 
   navigateToEditAssets() {
     this._router.navigate(['/pages/editassets']) 
+  }
+
+  editLocations(){
+    this.showEditLocations = true;
+  }
+
+  closeLocations(){
+    this.showEditLocations = false;
+  }
+
+  addLocation(location: any){
+    this.userLocations.push(location);
   }
 
 }

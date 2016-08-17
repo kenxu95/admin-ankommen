@@ -1,5 +1,44 @@
+<div class="widgets"> 
 
-<strong> Here </strong>
+  <div class="row">
+    <ba-card title="My Assets" class="col-md-8" baCardClass="with-scroll" (click)="deselectIcon()">
+     <div class="row clearfix">
+       <div class="kameleon-row" *ngFor="let icon of myAssetIcons">
+        <div class="kameleon-icon with-round-bg {{ icon.color }}" (click)="assetIconClicked(icon, $event)">
+        <img src="{{ ( icon.img | baKameleonPicture ) }}" [class.selected]="selectedAssetIcon === icon">
+        <span>{{ icon.name }}</span></div>
+      </div>
+    </div>
+  </ba-card>
+</div> 
+
+
+<div class="row">
+ <ba-card title="Potential Assets" class="col-md-8" baCardClass="with-scroll" (click)="deselectIcon()">
+  <div class="row clearfix">
+   <div class="kameleon-row" *ngFor="let icon of potentialAssetIcons">
+    <div class="kameleon-icon with-round-bg {{ icon.color }}" (click)="assetIconClicked(icon, $event)">
+    <img src="{{ ( icon.img | baKameleonPicture ) }}" [class.selected]="selectedAssetIcon === icon">
+    <span>{{ icon.name }}</span></div>
+  </div>
+</div> 
+</ba-card>
+</div>
+</div>
+
+
+<div class="floating-asset-editor col-md-3">
+<ba-card baCardClass="with-scroll">
+<i *ngIf="selectedAssetIcon && isMyIcon()" id="trash-icon" class="ion-trash-a" (click)="removeIcon()"> </i>
+<i *ngIf="selectedAssetIcon && !isMyIcon()" id="add-icon" class="ion-checkmark-round" (click)="addIcon()"> </i>
+
+
+<display-asset [assetIcon]="selectedAssetIcon"> </display-asset>
+</ba-card>
+</div>
+
+
+
 
 
 

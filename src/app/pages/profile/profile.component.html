@@ -58,7 +58,8 @@
 
    <div class="row clearfix">
      <div class="kameleon-row" *ngFor="let icon of allIcons">
-      <div class="kameleon-icon with-round-bg {{ icon.color }}"><img src="{{ ( icon.img | baKameleonPicture ) }}"><span>{{ icon.name }}</span></div>
+      <div class="kameleon-icon with-round-bg {{ icon.color }}">
+      <img src="{{ ( icon.img | baKameleonPicture ) }}"><span>{{ icon.name }}</span></div>
     </div>
   </div>
 
@@ -66,8 +67,18 @@
 
 
 <ba-card id="profile-card-locations" title="Locations" class="col-md-6" baCardClass="with-scroll">
-  <i id="profile-edit-locations" class="ion-edit" (click)="editLocations()"> </i>
-  <strong> LOLocation </strong>
+  <div *ngIf="!showEditLocations">
+    <i id="profile-edit-locations" class="ion-edit" (click)="editLocations()"> </i>
+  </div>
+
+  <div *ngFor="let userLocation of userLocations"> {{userLocation}} </div>
+
+  <div *ngIf="showEditLocations">
+    <i id="profile-edit-locations" class="ion-close-round" (click)="closeLocations()"></i>
+
+    <edit-locations (addLocation)="addLocation($event)"></edit-locations>
+  </div>
+
 </ba-card>
 
 </div>

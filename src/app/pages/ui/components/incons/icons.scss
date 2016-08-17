@@ -103,7 +103,7 @@ a.see-all-icons {
     border-radius: 50%;
     margin-bottom: 4px;
   }
-  @include setImgBg($default);
+  @include setImgBg($success);
 
   &.success {
     @include setImgBg($success);
