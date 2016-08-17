@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 import { BaKameleonPicturePipe } from '../../theme/pipes';
 import { IconsService } from '../ui/components/incons/icons.service';
 
-import { EditLocations } from './components/editLocations';
+import { EditLocations, Location } from './components/editLocations';
 
 @Component({
   selector: 'profile',
@@ -33,7 +33,7 @@ export class Profile {
   allIcons: any; 
 
   showEditLocations: boolean = false;
-  userLocations: string[] = [];
+  userLocations: Location[] = [];
 
   constructor(private _state:AppState,
     private _userService:UserService,

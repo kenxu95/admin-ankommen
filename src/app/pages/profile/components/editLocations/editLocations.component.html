@@ -1,1 +1,43 @@
-<strong> Adding locations goes here</strong>
+<!-- BEGIN CODE  -->
+<h3> Search for a new location </h3>
+<form (ngSubmit)="searchClicked()" #addressForm="ngForm">
+
+  <div class="form-group">
+    <input type='text' class="form-control" 
+    required [(ngModel)]="address" name="address" placeholder="Address" >
+  </div>
+  <button type="submit" class="btn btn-default" 
+  [disabled] ="!addressForm.form.valid"> Search </button>
+</form>
+
+<p>&nbsp;</p>
+
+<div *ngIf="foundAddresses && (foundAddresses.length > 0)">
+  <h4> Matching Addresses </h4>
+  <div class="found-addresses" [class.selected]="chosenAddress == foundAddress.formatted_address"
+  *ngFor="let foundAddress of foundAddresses" (click)="addressClicked(foundAddress)">
+  {{foundAddress.formatted_address}}</div>
+</div>
+
+
+<div *ngIf="chosenAddress">
+
+  <sebm-google-map [latitude]="lat" [longitude]="lng">
+    <sebm-google-map-marker [latitude]="lat" [longitude]="lng">
+     <sebm-google-map-info-window [disableAutoPan]="true">
+        <div id="radius-popup"> Radius: {{radius}} kilometers </div>
+     </sebm-google-map-info-window>
+   </sebm-google-map-marker>
+
+   <sebm-google-map-circle [latitude]="lat" [longitude]="lng"
+   [radius]="radius * 1000" [editable]="true" (radiusChange)="radiusChanged($event)">
+ </sebm-google-map-circle>
+</sebm-google-map>
+
+
+<p>&nbsp;</p>
+<button type="submit" class="btn btn-default" (click)="submitLocation()">Add Location</button>
+
+</div>
+
+   <!-- END CODE -->

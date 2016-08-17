@@ -71,12 +71,18 @@
     <i id="profile-edit-locations" class="ion-edit" (click)="editLocations()"> </i>
   </div>
 
-  <div *ngFor="let userLocation of userLocations"> {{userLocation}} </div>
+  <strong *ngIf="userLocations.length == 0"> No Locations! </strong> 
+
+  <div *ngFor="let userLocation of userLocations">
+    <div> <strong> {{userLocation.address}} </strong> ( Radius: {{userLocation.radius }} km) </div>
+  </div>
+  <p>&nbsp;</p>
+
+
 
   <div *ngIf="showEditLocations">
+    <edit-locations (newLoc)="addLocation($event)"></edit-locations>
     <i id="profile-edit-locations" class="ion-close-round" (click)="closeLocations()"></i>
-
-    <edit-locations (addLocation)="addLocation($event)"></edit-locations>
   </div>
 
 </ba-card>

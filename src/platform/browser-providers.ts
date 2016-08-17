@@ -19,7 +19,7 @@ import { routes } from '../app/app.routes';
 // import { InMemoryBackendService, SEED_DATA } from 'angular2-in-memory-web-api';
 // import { MockTasksDatabase } from '../app/pages/tasks/mocktasksdatabase';
 
-// import { GOOGLE_MAPS_PROVIDERS, LazyMapsAPILoaderConfig } from 'angular2-google-maps/core';
+import { GOOGLE_MAPS_PROVIDERS, LazyMapsAPILoaderConfig } from 'angular2-google-maps/core';
 
 // 
 /*
@@ -34,15 +34,15 @@ export const APPLICATION_PROVIDERS = [
   provideRouter(routes),
 
   ...HTTP_PROVIDERS,
-  // ...GOOGLE_MAPS_PROVIDERS,
+  ...GOOGLE_MAPS_PROVIDERS,
 
   { provide: LocationStrategy, useClass: HashLocationStrategy },
 
-  // { provide: LazyMapsAPILoaderConfig, useFactory: () => {
-  //   let config = new LazyMapsAPILoaderConfig();
-  //   config.apiKey = 'AIzaSyB1pb7Ppr6s5xroLDrvrj24jK1pHiib4Pk'; //TODO: store secretly
-  //   return config;
-  // }}
+  { provide: LazyMapsAPILoaderConfig, useFactory: () => {
+    let config = new LazyMapsAPILoaderConfig();
+    config.apiKey = 'AIzaSyB1pb7Ppr6s5xroLDrvrj24jK1pHiib4Pk'; //TODO: store secretly
+    return config;
+  }}
   // { provide: XHRBackend, useClass: InMemoryBackendService }, //TODO REMOVE: in-mem server
   // { provide: SEED_DATA, useClass: MockTasksDatabase } // TODO REMOVE: in-mem server data
 ];
