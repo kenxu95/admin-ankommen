@@ -8,7 +8,7 @@ export const mockUser: User = {
   email: "nschwimmer@schwin.com",
   notificationFrequency: 1,
   description: "I am a person that has an account on this website.",
-  assets: ["Santa", "Alien", "Vector", "Surfer"],
+  assets: ["Santa", "Medal", "Batman", "Surfer"],
   locations: ["San Diego", "Houston", "Chicago"],
   image: "IMAGE",
   myTasks: [1, 5],

@@ -1,12 +1,8 @@
-    profile-edit-pic, #profile-edit-info, #profile-edit-assets, #profile-edit-locations { 
+    #profile-edit-info, #profile-edit-assets, #profile-edit-locations { 
       display: none;
       position: absolute;
       top: 5px;
       right: 5px;
-    }
-
-    #profile-card-pic:hover profile-edit-pic {
-      display: block;
     }
 
     #profile-card-info:hover #profile-edit-info {
@@ -22,8 +18,7 @@
     }
 
 
-/* For some reason, the color of the text in a module is always white? */
-.modal-title, #modal-text {
-  color: black;
-}
-
+    /* For some reason, the color of the text in a module is always white? */
+    .modal-title, #modal-text {
+      color: black;
+    }

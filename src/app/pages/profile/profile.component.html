@@ -2,9 +2,9 @@
 
   <div class="row">
 
-    <ba-card id="profile-card-pic" class="col-md-3" baCardClass="with-scroll">
-      <img src="{{ ( 'Nasta' | baProfilePicture ) }}">
-      <i id="profile-edit-pic" class="ion-edit" (click)="editPic()"> </i>
+    <!-- PROFILE PIC UPLOADER -->
+    <ba-card class="col-md-2" baCardClass="with-scroll">
+      <ba-picture-uploader [picture]="( 'Nasta' | baProfilePicture)" [defaultPicture]="defaultPicture"></ba-picture-uploader>
     </ba-card>
 
     <ba-card *ngIf="mockUser" id="profile-card-info" class="col-md-9" baCardClass="with-scroll">
@@ -49,10 +49,10 @@
  </ba-card>
 </div>
 
-
-
+<!-- ASSETS AND LOCATIONS -->
 <div class="row" baCardClass="with-scroll">
 
+<!-- ASSETS -->
  <ba-card id="profile-card-assets" title="Assets" class="col-md-6">
    <i id="profile-edit-assets" class="ion-edit" (click)="navigateToEditAssets()"> </i>
 
@@ -65,24 +65,26 @@
 
 </ba-card>
 
-
+<!-- LOCATIONS -->
 <ba-card id="profile-card-locations" title="Locations" class="col-md-6" baCardClass="with-scroll">
+<!-- NOT EDITING LOCATIONS -->
   <div *ngIf="!showEditLocations">
     <i id="profile-edit-locations" class="ion-edit" (click)="editLocations()"> </i>
   </div>
 
+  <!-- WHEN NO LOCATIONS SELECTED -->
   <strong *ngIf="userLocations.length == 0"> No Locations! </strong> 
 
+  <!-- ALWAYS DISPLAY ALL LOCATIONS -->
   <div *ngFor="let userLocation of userLocations">
     <div> <strong> {{userLocation.address}} </strong> ( Radius: {{userLocation.radius }} km) </div>
   </div>
   <p>&nbsp;</p>
 
-
-
+  <!-- EDIT LOCATIONS -->
   <div *ngIf="showEditLocations">
-    <edit-locations (newLoc)="addLocation($event)"></edit-locations>
     <i id="profile-edit-locations" class="ion-close-round" (click)="closeLocations()"></i>
+    <edit-locations (newLoc)="addLocation($event)"></edit-locations>
   </div>
 
 </ba-card>
@@ -95,6 +97,8 @@
 <!-- <div bsModal #lgProfileEditAssetsModal="bs-modal" class="modal fade" tabindex="-1" 
 role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 
+
+C
 <profile-edit-assets 
 [show]="showEditAssets" 
 (close)="showEditAssets=false; 

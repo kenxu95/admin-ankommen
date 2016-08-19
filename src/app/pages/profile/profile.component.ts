@@ -9,17 +9,18 @@ import { MODAL_DIRECTIVES, BS_VIEW_PROVIDERS } from 'ng2-bootstrap/ng2-bootstrap
 import { UserService } from '../tasks/user.service';
 import { Router } from '@angular/router';
 
+import { BaPictureUploader } from '../../theme/components';
 import { BaKameleonPicturePipe } from '../../theme/pipes';
 import { IconsService } from '../ui/components/incons/icons.service';
 
-import { EditLocations, Location } from './components/editLocations';
+import { EditLocations } from './components/editLocations';
 
 @Component({
   selector: 'profile',
   template: require('./profile.component.html'),
   styles: [require('./profile.component.css'), 
            require('../ui/components/incons/icons.scss')],
-  directives: [BaCard, MODAL_DIRECTIVES, EditLocations],
+  directives: [BaCard, MODAL_DIRECTIVES, EditLocations, BaPictureUploader],
   providers: [UserService, IconsService],
   encapsulation: ViewEncapsulation.None,
   pipes: [BaProfilePicturePipe, BaKameleonPicturePipe],
@@ -34,6 +35,9 @@ export class Profile {
 
   showEditLocations: boolean = false;
   userLocations: Location[] = [];
+
+  defaultPicture = 'assets/img/theme/no-photo.png';
+
 
   constructor(private _state:AppState,
     private _userService:UserService,
@@ -50,9 +54,10 @@ export class Profile {
   ngOnInit() {
     this._userService.getMockUser().then(mockUser => {
       this.mockUser = mockUser;
-    });
 
-    this.allIcons = this._iconsService.getAll().kameleonIcons;
+      this.allIcons = this._iconsService.getAll().kameleonIcons.filter(icon =>
+        this.mockUser.assets.indexOf(icon.name) >= 0);
+    });
   }
 
   navigateToEditAssets() {

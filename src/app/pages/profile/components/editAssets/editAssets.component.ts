@@ -6,6 +6,7 @@ import { BaKameleonPicturePipe } from '../../../../theme/pipes';
 import { IconsService } from '../../../ui/components/incons/icons.service';
 
 import { DisplayAsset } from '../displayAsset';
+import { EditHours } from '../editHours';
 
 @Component({
   selector: 'edit-assets',
@@ -26,21 +27,19 @@ import { DisplayAsset } from '../displayAsset';
   img:hover {
     background: #fffe00 !important;
   }
-
-
-  ` ],
+  `],
   pipes: [BaKameleonPicturePipe],
-  directives: [BaCard, DisplayAsset],
+  directives: [BaCard, DisplayAsset, EditHours],
   providers: [IconsService]
 })
 
 export class EditAssets {
-
   mockUserAssets: string[] = ["Santa", "Medal", "Batman", "Surfer"];
   myAssetIcons: any;
   potentialAssetIcons: any;
 
   selectedAssetIcon: any;
+  daysOfWeek: string[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
   constructor(private _state:AppState,
     private _iconsService:IconsService){
@@ -71,8 +70,7 @@ export class EditAssets {
   isMyIcon(icon: any) {
     if (this.selectedAssetIcon){
       return this.myAssetIcons.filter(icon => 
-        icon.name == this.selectedAssetIcon.name
-        )[0];
+        icon.name == this.selectedAssetIcon.name)[0];
     }
   }
 
@@ -87,7 +85,14 @@ export class EditAssets {
     this.potentialAssetIcons.splice(indexRemove, 1);
     this.myAssetIcons.push(this.selectedAssetIcon);
   }
+  
 }
+
+
+
+
+
+
 
 
 

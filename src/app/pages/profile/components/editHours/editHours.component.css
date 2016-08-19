@@ -1,0 +1,18 @@
+  .time-bar {
+    height: 30px;
+    width: 22px;
+    background: gray;
+    display: inline-block;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    margin-right: -1px;
+  }
+
+  .highlighted {
+    background: green !important;
+  }
+
+  .day-time-display {
+    float: right;
+  }
