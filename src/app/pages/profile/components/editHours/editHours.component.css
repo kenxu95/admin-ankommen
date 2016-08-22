@@ -1,12 +1,11 @@
-  .time-bar {
+  .time-half-hour {
     height: 30px;
-    width: 22px;
+    width: 11px;
     background: gray;
     display: inline-block;
     border-style: solid;
-    border-width: 1px;
     border-color: black;
-    margin-right: -1px;
+    margin: -0.5px;
   }
 
   .highlighted {

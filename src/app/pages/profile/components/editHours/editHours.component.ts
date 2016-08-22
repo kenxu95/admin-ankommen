@@ -10,7 +10,7 @@ export class EditHours {
   @Input()
   dayOfWeek: string;
 
-  hoursInADay: number[] = _.range(24);
+  halfHoursInADay: number[] = _.range(24 * 2);
 
 // TIME BAR CODE
   mouseDown: boolean = false;
@@ -18,7 +18,7 @@ export class EditHours {
   rangeMin: number;
   rangeMax: number;
 
-  currentHourHover: number = null;
+  currentHalfHourHover: number = -1;
 
   @HostListener('mousedown', ['$event'])
   onMouseDown(event) {
@@ -28,13 +28,36 @@ export class EditHours {
   @HostListener('mouseup')
   onMouseUp(event) {
     this.mouseDown = false;
-    this.addRange();
+    if (this.checkForDeletion()){
+      this.addRange();
+    }
   }
 
+  private splitRange(i: number){
+    let rangeStart = this.timeRanges[i][0];
+    let rangeEnd = this.timeRanges[i][1];
+    if (this.rangeMin - rangeStart >= 1)
+      this.timeRanges.push([rangeStart, this.rangeMin - 1]);
+    if (rangeEnd - this.rangeMax >= 1)
+      this.timeRanges.push([this.rangeMax + 1, rangeEnd]);
+    this.timeRanges.splice(i, 1); // DELETION
+  }
+
+  private checkForDeletion() {
+    for (var i = 0; i < this.timeRanges.length; i++){
+      let rangeStart = this.timeRanges[i][0];
+      let rangeEnd = this.timeRanges[i][1];
+      if (rangeStart <= this.rangeMin && rangeEnd >= this.rangeMax){
+        this.splitRange(i);        
+        return false;
+      }
+    }
+    return true;
+  }
     // HELPER FUNCTION
   // printTimeRanges(){
   //   for (var i = 0; i < this.timeRanges.length; i++)
-  //     console.log(this.timeRanges[i][0] + "  " this.timeRanges[i][1]);
+  //     console.log(this.timeRanges[i][0] + "  " + this.timeRanges[i][1]);
   //   console.log("------------------");
   // }
 
@@ -68,7 +91,6 @@ export class EditHours {
   }
 
   private addRange() {
-
     var rangeToAdd = [this.findNewRangeStart(), this.findNewRangeEnd()];
 
     for (var i = this.timeRanges.length - 1; i >= 0; i--){
@@ -80,55 +102,70 @@ export class EditHours {
     this.timeRanges.sort(this.compareFn);
   }
 
+  private timeToString(halfHour: number){
+    if (halfHour % 2 == 1)
+      return (Math.floor(halfHour / 2)).toString() + ":30";
+    else
+      return (halfHour / 2).toString() + ":00";
+  }
+
   private getTimeString(i: number){
-    return this.timeRanges[i][0].toString() + " to " + (this.timeRanges[i][1] + 1).toString();
+    return this.timeToString(this.timeRanges[i][0]) + " to " + this.timeToString(this.timeRanges[i][1] + 1);
   }
 
   getTime() {
-    if (this.currentHourHover){
+    if (this.currentHalfHourHover >= 0){
       for (var i = 0; i < this.timeRanges.length; i++){
-        if (this.currentHourHover >= this.timeRanges[i][0] &&   
-          this.currentHourHover <= this.timeRanges[i][1])
+        if (this.currentHalfHourHover >= this.timeRanges[i][0] &&   
+          this.currentHalfHourHover <= this.timeRanges[i][1])
           return this.getTimeString(i);
       }
     }
     return "";
   }
 
-
-  over(hour: number) {
-    this.currentHourHover = hour;
+  over(halfHour: number) {
+    this.currentHalfHourHover = halfHour;
     if (this.mouseDown) {
-      if (hour < this.rangeMin)
-        this.rangeMin = hour;
-      if (hour > this.rangeMax)
-        this.rangeMax = hour;
+      if (halfHour < this.rangeMin)
+        this.rangeMin = halfHour;
+      if (halfHour > this.rangeMax)
+        this.rangeMax = halfHour;
     }else {
-      this.rangeMin = hour;
-      this.rangeMax = hour;
+      this.rangeMin = halfHour;
+      this.rangeMax = halfHour;
     } 
   }
 
-  leave(hour: number){
-    this.currentHourHover = null;
+  leave(halfHour: number){
+    this.currentHalfHourHover = -1;
   }
+
 
   private inRange(test: number, min: number, max: number){
     return (test >= min && test <= max);
   }
 
-  isHighlighted(hour: number) {
-    if (this.mouseDown && this.inRange(hour, this.rangeMin, this.rangeMax)){
+  isHighlighted(halfHour: number) {
+    if (this.mouseDown && this.inRange(halfHour, this.rangeMin, this.rangeMax)){
       return true;
     } 
 
     for (var i = 0; i < this.timeRanges.length; i++){
-      if(this.inRange(hour, this.timeRanges[i][0], this.timeRanges[i][1])){
+      if(this.inRange(halfHour, this.timeRanges[i][0], this.timeRanges[i][1])){
         return true;
       }
     }
     return false;
-  }  
+  } 
+
+  getBorderStyle(halfHour: number){
+    if (halfHour % 2 == 0)
+      return '1px 0px 1px 1px';
+    return '1px 1px 1px 0px';
+  }
+
+
 
 }
 

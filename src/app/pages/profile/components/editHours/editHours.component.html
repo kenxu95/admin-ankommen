@@ -1,7 +1,9 @@
 <div>
   <div class="day-top-row">
-     <strong> {{dayOfWeek}} </strong>
-     <strong class="day-time-display">{{getTime()}}</strong>
-  </div>
-  <div class="time-bar" *ngFor="let hour of hoursInADay" on-mouseover='over(hour)' on-mouseleave="leave(hour)" [class.highlighted]="isHighlighted(hour)"></div>
+   <strong> {{dayOfWeek}} </strong>
+   <strong class="day-time-display">{{getTime()}}</strong>
+ </div>
+
+ <div class="time-half-hour" *ngFor="let halfHour of halfHoursInADay" on-mouseover='over(halfHour)' on-mouseleave='leave(halfHour)' [class.highlighted]="isHighlighted(halfHour)" [style.border-width]="getBorderStyle(halfHour)">
+ </div>
 </div>
