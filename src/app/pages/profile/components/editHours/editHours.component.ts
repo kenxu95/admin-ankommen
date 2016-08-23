@@ -10,7 +10,8 @@ export class EditHours {
   @Input()
   dayOfWeek: string;
 
-  halfHoursInADay: number[] = _.range(24 * 2);
+  private timeChunks = _.range(4); 
+  private halfHoursPerChunk = _.range(48 / this.timeChunks.length);
 
 // TIME BAR CODE
   mouseDown: boolean = false;
@@ -165,7 +166,12 @@ export class EditHours {
     return '1px 1px 1px 0px';
   }
 
-
+  getTimeLabel(timeChunk: number){
+    let displayHour = (timeChunk * this.halfHoursPerChunk.length) / 2;
+    if (displayHour < 10)
+      return "0" + displayHour + ":00";
+    return displayHour + ":00";
+  }
 
 }
 

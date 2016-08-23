@@ -4,6 +4,17 @@
    <strong class="day-time-display">{{getTime()}}</strong>
  </div>
 
- <div class="time-half-hour" *ngFor="let halfHour of halfHoursInADay" on-mouseover='over(halfHour)' on-mouseleave='leave(halfHour)' [class.highlighted]="isHighlighted(halfHour)" [style.border-width]="getBorderStyle(halfHour)">
+ <div class="time-selector-wrapper">
+  <div class="time-chunk" *ngFor="let timeChunk of timeChunks">
+   <div class="time-label"> {{ getTimeLabel(timeChunk) }}  </div>
+
+   <div class="time-half-hour" 
+   *ngFor="let halfHourOffset of halfHoursPerChunk"
+   on-mouseover='over(timeChunk * halfHoursPerChunk.length + halfHourOffset)' 
+   on-mouseleave='leave(timeChunk * halfHoursPerChunk.length + halfHourOffset)' 
+   [class.highlighted]="isHighlighted(timeChunk * halfHoursPerChunk.length + halfHourOffset)" 
+   [style.border-width]="getBorderStyle(timeChunk * halfHoursPerChunk.length + halfHourOffset)">
  </div>
+</div>
+</div>
 </div>

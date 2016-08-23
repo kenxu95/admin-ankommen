@@ -27,6 +27,17 @@ import { EditHours } from '../editHours';
   img:hover {
     background: #fffe00 !important;
   }
+
+  #trash-icon, #add-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+
+  .floating-asset-display {
+    position: relative;
+  }
+
   `],
   pipes: [BaKameleonPicturePipe],
   directives: [BaCard, DisplayAsset, EditHours],

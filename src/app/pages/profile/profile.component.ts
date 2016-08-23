@@ -14,6 +14,8 @@ import { BaKameleonPicturePipe } from '../../theme/pipes';
 import { IconsService } from '../ui/components/incons/icons.service';
 
 import { EditLocations } from './components/editLocations';
+import { store } from '../../shared/store';
+
 
 @Component({
   selector: 'profile',
@@ -52,6 +54,12 @@ export class Profile {
 
 
   ngOnInit() {
+
+    // TODO: Test code to remove
+    store.findAll('user').then((allUsers) => {
+      console.log(allUsers);
+    });
+
     this._userService.getMockUser().then(mockUser => {
       this.mockUser = mockUser;
 

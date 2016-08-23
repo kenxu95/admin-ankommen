@@ -29,7 +29,7 @@
 
 
 <div class="floating-asset-editor col-md-5">
-<ba-card baCardClass="with-scroll">
+<ba-card id="floating-asset-display" baCardClass="with-scroll">
 <i *ngIf="selectedAssetIcon && isMyIcon()" id="trash-icon" class="ion-trash-a" (click)="removeIcon()"> </i>
 <i *ngIf="selectedAssetIcon && !isMyIcon()" id="add-icon" class="ion-checkmark-round" (click)="addIcon()"> </i>
 

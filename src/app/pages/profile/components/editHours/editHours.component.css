@@ -1,5 +1,20 @@
+  .time-selector-wrapper {
+    margin-left: 12px;
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  .time-chunk {
+    display: inline-block;
+  }
+
+  .time-label {
+    font-size: 10px;
+    margin-left: -12px;
+  }
+
   .time-half-hour {
-    height: 30px;
+    height: 28px;
     width: 11px;
     background: gray;
     display: inline-block;
