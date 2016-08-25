@@ -6,7 +6,6 @@ import { BaProfilePicturePipe } from '../../theme/pipes';
 
 import { MODAL_DIRECTIVES, BS_VIEW_PROVIDERS } from 'ng2-bootstrap/ng2-bootstrap';
 
-import { UserService } from '../tasks/user.service';
 import { Router } from '@angular/router';
 
 import { BaPictureUploader } from '../../theme/components';
@@ -14,8 +13,9 @@ import { BaKameleonPicturePipe } from '../../theme/pipes';
 import { IconsService } from '../ui/components/incons/icons.service';
 
 import { EditLocations } from './components/editLocations';
-import { store } from '../../shared/store';
 
+// import { store } from '../../shared/store';
+import { UserService } from '../../shared/user.service';
 
 @Component({
   selector: 'profile',
@@ -55,17 +55,25 @@ export class Profile {
 
   ngOnInit() {
 
-    // TODO: Test code to remove
-    store.findAll('user').then((allUsers) => {
-      console.log(allUsers);
-    });
+    // JS-DATA CODE (REMOVED)
+    // store.findAll('user').then((allUsers) => {
+    //   console.log(allUsers);
+    // });
 
-    this._userService.getMockUser().then(mockUser => {
-      this.mockUser = mockUser;
+//    localStorage.setItem('id_token',"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4MDAwXC9hcGlcL2F1dGhcL2xvZ2luIiwiaWF0IjoxNDcyMTMyMzYxLCJleHAiOjE0NzIxMzU5NjEsIm5iZiI6MTQ3MjEzMjM2MSwianRpIjoiZDY1Y2RlYzZlNjQ1MzUxNjY0ZTIwMzY4Mjg0YTkwM2UifQ.RgWGvbFl5t6ENs3MudnaC8EC2ukebjWAf4zLC0uq10o"); 
 
-      this.allIcons = this._iconsService.getAll().kameleonIcons.filter(icon =>
-        this.mockUser.assets.indexOf(icon.name) >= 0);
-    });
+    this._userService.findAll().subscribe(
+      data => console.log(data),
+      err => console.log(err));
+
+
+    // CODE BEFORE
+    // this._userService.getMockUser().then(mockUser => {
+    //   this.mockUser = mockUser;
+
+    //   this.allIcons = this._iconsService.getAll().kameleonIcons.filter(icon =>
+    //     this.mockUser.assets.indexOf(icon.name) >= 0);
+    // });
   }
 
   navigateToEditAssets() {

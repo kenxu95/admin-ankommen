@@ -15,7 +15,7 @@ const convertToDate = function (record) {
 
 
 export const adapter = new HttpAdapter({
-  basePath: 'api' /* TODO: WHERE DOES OUR API SIT */ 
+  basePath: 'http://localhost:8000/api',
 })
 
 export const store = new DataStore({
@@ -39,10 +39,70 @@ store.registerAdapter('http', adapter, { default: true })
 
 // Define mapper for User
 store.defineMapper('user', {
-  endpoint: 'users', // WHERE DOES OUR API SIT
+  endpoint: 'users', 
   schema: schemas.user,
   relations: relations.user
 })
+
+
+store.defineMapper('image', {
+  endpoint: 'images',
+  schema: schemas.image,
+  relations: relations.image
+})
+
+
+store.defineMapper('location', {
+  endpoint: 'locations',
+  schema: schemas.location,
+  relations: relations.location
+})
+
+
+store.defineMapper('userAsset', {
+  endpoint: 'userassets',
+  schema: schemas.userAsset,
+  relations: relations.userAsset
+})
+
+
+store.defineMapper('task', {
+  endpoint: 'tasks',
+  schema: schemas.task,
+  relations: relations.task
+})
+
+
+store.defineMapper('timeRange', {
+  endpoint: 'timeRanges',
+  schema: schemas.timeRange,
+  relations: relations.timeRange
+})
+
+store.defineMapper('asset', {
+  endpoint: 'assets',
+  schema: schemas.asset,
+  relations: relations.asset
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

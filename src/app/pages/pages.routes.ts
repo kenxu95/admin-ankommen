@@ -28,12 +28,14 @@ import {ActiveTasks} from './tasks/components/activetasks/activetasks.component'
 import {Profile} from './profile/profile.component';
 import {EditAssets} from './profile/components/editAssets/editAssets.component';
 
+import { CanActivateViaAuthGuard } from '../shared/auth-guard';
 
 //noinspection TypeScriptValidateTypes
 export const PagesRoutes:RouterConfig = [  
 {
   path: 'pages',
   component: Pages,
+  canActivate: [CanActivateViaAuthGuard],
   children: [
   {
     path: 'profile',

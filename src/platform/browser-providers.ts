@@ -20,6 +20,9 @@ import { routes } from '../app/app.routes';
 // import { MockTasksDatabase } from '../app/pages/tasks/mocktasksdatabase';
 
 import { GOOGLE_MAPS_PROVIDERS, LazyMapsAPILoaderConfig } from 'angular2-google-maps/core';
+import { AUTH_PROVIDERS } from 'angular2-jwt';
+
+import { CanActivateViaAuthGuard } from '../app/shared/auth-guard';
 
 // 
 /*
@@ -35,6 +38,9 @@ export const APPLICATION_PROVIDERS = [
 
   ...HTTP_PROVIDERS,
   ...GOOGLE_MAPS_PROVIDERS,
+  ...AUTH_PROVIDERS,
+
+  CanActivateViaAuthGuard,
 
   { provide: LocationStrategy, useClass: HashLocationStrategy },
 
