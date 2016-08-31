@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
 import { AuthHttp } from 'angular2-jwt';
-import { API_BASE_PATH } from './auth-constants';
+import { API_USER_PATH } from './auth-constants';
+import { User } from './User';
 
 @Injectable()
 export class UserService {
 
   constructor(private authHttp: AuthHttp) {}
 
-  findAll(){
-    return this.authHttp.get(API_BASE_PATH + '/users');
+  getUser() {
+    return this.authHttp.get(API_USER_PATH);
+  }
+
+  updateUser(user: User) {
+    return this.authHttp.put(API_USER_PATH, {"user": user});
   }
 
 }

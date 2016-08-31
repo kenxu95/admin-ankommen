@@ -7,42 +7,36 @@
       <ba-picture-uploader [picture]="( 'Nasta' | baProfilePicture)" [defaultPicture]="defaultPicture"></ba-picture-uploader>
     </ba-card>
 
-    <ba-card *ngIf="mockUser" id="profile-card-info" class="col-md-9" baCardClass="with-scroll">
+    <ba-card *ngIf="user" id="profile-card-info" class="col-md-9" baCardClass="with-scroll">
       <!-- VIEW INFORMATION  -->
       <div *ngIf="!showEditInfo">
        <i id="profile-edit-info" class="ion-edit" (click)="showEditInfo = true"> </i>
 
-       <h4> {{mockUser.firstname}} {{mockUser.lastname}}</h4>
-       <h5> {{mockUser.username}}</h5>
-       <h5> {{mockUser.email}}</h5>
+       <h4> {{user.name}} </h4>
+       <h5> {{user.email}}</h5>
        <p>&nbsp;</p>
-       <p> {{mockUser.description}} </p>
+       <p *ngIf="user.description.length > 0"> {{user.description}}</p>
+       <p *ngIf="user.description.length == 0"> (No Description)</p>
+
      </div>
 
      <!-- EDIT INFO -->
      <div *ngIf="showEditInfo">
-       <i id="profile-edit-info" class="ion-close-round" (click)="showEditInfo = false"> </i>
+       <i id="profile-edit-info" class="ion-checkmark" (click)="saveInfo()"> </i>
 
-       <div class="row">
-        <div class="form-group col-md-6">
-          <label for="firstname"> First Name</label>
-          <input [(ngModel)]="mockUser.firstname" type="text" class="form-control" name="firstname" >
-        </div>
-
-        <div class="form-group col-md-6">
-         <label for="lastname"> Last Name</label>
-         <input [(ngModel)]="mockUser.lastname" type="text" class="form-control" name="lastname" >
-       </div> 
-     </div>
+       <div class="form-group">
+          <label for="name">Name</label>
+          <input [(ngModel)]="user.name" type="text" class="form-control" name="name" >
+       </div>
 
      <div class="form-group">
        <label for="email"> Email</label>
-       <input [(ngModel)]="mockUser.email" type="text" class="form-control" name="email" >
+       <input [(ngModel)]="user.email" type="text" class="form-control" name="email" >
      </div>
 
      <div class="form-group">
        <label for="description"> Description </label>
-       <textarea [(ngModel)]="mockUser.description" type="text" class="form-control" name="description"></textarea>
+       <textarea [(ngModel)]="user.description" type="text" class="form-control" name="description"></textarea>
      </div>   
 
    </div>
@@ -77,14 +71,19 @@
 
   <!-- ALWAYS DISPLAY ALL LOCATIONS -->
   <div *ngFor="let userLocation of userLocations">
-    <div> <strong> {{userLocation.address}} </strong> ( Radius: {{userLocation.radius }} km) </div>
+    <div id="profile-display-location"> 
+      <strong> {{userLocation.name}} </strong> 
+      <div> ( Radius: {{userLocation.radius}} km) </div>
+      <i id="profile-delete-location" class="ion-close-round" (click)="removeLocation(userLocation)"></i>
+    <p> &nbsp; </p>
+    </div>
   </div>
   <p>&nbsp;</p>
 
   <!-- EDIT LOCATIONS -->
   <div *ngIf="showEditLocations">
     <i id="profile-edit-locations" class="ion-close-round" (click)="closeLocations()"></i>
-    <edit-locations (newLoc)="addLocation($event)"></edit-locations>
+    <edit-locations (newLoc)="saveLocation($event)"></edit-locations>
   </div>
 
 </ba-card>

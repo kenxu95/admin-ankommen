@@ -3,7 +3,7 @@ import { URLSearchParams, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class LocationsService {
+export class GoogleMapsService {
 
   // TODO: Store this secretely to prevent quota theft 
   private apiKey = "AIzaSyB1pb7Ppr6s5xroLDrvrj24jK1pHiib4Pk";

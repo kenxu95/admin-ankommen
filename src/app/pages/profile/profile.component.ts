@@ -4,8 +4,6 @@ import { AppState } from '../../app.state';
 import { BaCard } from '../../theme/components';
 import { BaProfilePicturePipe } from '../../theme/pipes';
 
-import { MODAL_DIRECTIVES, BS_VIEW_PROVIDERS } from 'ng2-bootstrap/ng2-bootstrap';
-
 import { Router } from '@angular/router';
 
 import { BaPictureUploader } from '../../theme/components';
@@ -16,33 +14,35 @@ import { EditLocations } from './components/editLocations';
 
 // import { store } from '../../shared/store';
 import { UserService } from '../../shared/user.service';
+import { LocationService } from '../../shared/location.service';
+import { User } from '../../shared/user';
+import { Location } from '../../shared/location';
 
 @Component({
   selector: 'profile',
   template: require('./profile.component.html'),
   styles: [require('./profile.component.css'), 
            require('../ui/components/incons/icons.scss')],
-  directives: [BaCard, MODAL_DIRECTIVES, EditLocations, BaPictureUploader],
-  providers: [UserService, IconsService],
+  directives: [BaCard, EditLocations, BaPictureUploader],
+  providers: [UserService, LocationService, IconsService],
   encapsulation: ViewEncapsulation.None,
-  pipes: [BaProfilePicturePipe, BaKameleonPicturePipe],
-  viewProviders: [BS_VIEW_PROVIDERS]
+  pipes: [BaProfilePicturePipe, BaKameleonPicturePipe]
 })
 
 export class Profile {
 
-  // THIS ALL NEEDS TO BE REPLACED
-  mockUser: any;
+  user: User;
   allIcons: any; 
-
-  showEditLocations: boolean = false;
   userLocations: Location[] = [];
+
+  showEditInfo: boolean = false;
+  showEditLocations: boolean = false;
 
   defaultPicture = 'assets/img/theme/no-photo.png';
 
-
   constructor(private _state:AppState,
     private _userService:UserService,
+    private _locationService:LocationService,
     private _router:Router,
     private _iconsService:IconsService){
     this._state.notifyDataChanged('notOnMenuTitle', 'Profile'); 
@@ -52,32 +52,37 @@ export class Profile {
     this._state.notifyDataChanged('notOnMenuTitle', '');
   }
 
+  initGetLocations() {
+    this._locationService.getLocations()
+      .subscribe(
+        data => {
+          this.userLocations = data.json();
+        },
+        err => console.log(err)        
+      );
+  }
+
+  initGetUser() {
+    this._userService.getUser()
+      .subscribe(
+        data => {
+          this.user = data.json().user;
+          this.initGetLocations(); // Get all locations
+        },
+        err => console.log(err));
+  }
 
   ngOnInit() {
-
-    // JS-DATA CODE (REMOVED)
-    // store.findAll('user').then((allUsers) => {
-    //   console.log(allUsers);
-    // });
-
-//    localStorage.setItem('id_token',"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4MDAwXC9hcGlcL2F1dGhcL2xvZ2luIiwiaWF0IjoxNDcyMTMyMzYxLCJleHAiOjE0NzIxMzU5NjEsIm5iZiI6MTQ3MjEzMjM2MSwianRpIjoiZDY1Y2RlYzZlNjQ1MzUxNjY0ZTIwMzY4Mjg0YTkwM2UifQ.RgWGvbFl5t6ENs3MudnaC8EC2ukebjWAf4zLC0uq10o"); 
-
-    this._userService.findAll().subscribe(
-      data => console.log(data),
-      err => console.log(err));
-
-
-    // CODE BEFORE
-    // this._userService.getMockUser().then(mockUser => {
-    //   this.mockUser = mockUser;
-
-    //   this.allIcons = this._iconsService.getAll().kameleonIcons.filter(icon =>
-    //     this.mockUser.assets.indexOf(icon.name) >= 0);
-    // });
+    this.initGetUser();
   }
 
   navigateToEditAssets() {
     this._router.navigate(['/pages/editassets']) 
+  }
+
+  saveInfo(){
+    this._userService.updateUser(this.user).subscribe(data => void(0), err => console.log(err));
+    this.showEditInfo = false;
   }
 
   editLocations(){
@@ -88,12 +93,35 @@ export class Profile {
     this.showEditLocations = false;
   }
 
-  addLocation(location: any){
-    this.userLocations.push(location);
+  saveLocation(location: Location){
+    this._locationService.storeLocation(location)
+      .subscribe(
+        data => this.initGetLocations(), // if save is confirmed, refresh locations list
+        err => console.log(err));
+  }
+
+  removeLocation(location: Location){
+    this._locationService.destroyLocation(location.id)
+      .subscribe(
+        data => this.initGetLocations(), // if remove is confirmed, refresh locations list
+        err => console.log(err));
   }
 
 }
 
+
+    // JS-DATA CODE (REMOVED)
+    // store.findAll('user').then((allUsers) => {
+    //   console.log(allUsers);
+    // });
+
+    // CODE BEFORE
+    // this._userService.getMockUser().then(mockUser => {
+    //   this.mockUser = mockUser;
+
+    //   this.allIcons = this._iconsService.getAll().kameleonIcons.filter(icon =>
+    //     this.mockUser.assets.indexOf(icon.name) >= 0);
+    // });
 
 
 

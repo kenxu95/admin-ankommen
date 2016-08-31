@@ -32,4 +32,8 @@ export class BaPageTop {
   public scrolledChanged(isScrolled) {
     this.isScrolled = isScrolled;
   }
+
+  private deleteLoginToken(){
+    localStorage.removeItem('id_token');
+  }
 }

@@ -17,8 +17,24 @@
       display: block;
     }
 
+    #profile-display-location {
+      position: relative;
+    }
 
-    /* For some reason, the color of the text in a module is always white? */
+    #profile-delete-location {
+      display: none;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+    }
+
+    #profile-display-location:hover #profile-delete-location {
+      display: block;
+    }
+/*
+
+     For some reason, the color of the text in a module is always white? 
     .modal-title, #modal-text {
       color: black;
     }
+*/

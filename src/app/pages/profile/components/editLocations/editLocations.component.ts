@@ -1,15 +1,14 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
 import { GOOGLE_MAPS_DIRECTIVES } from 'angular2-google-maps/core';
-import { LocationsService } from './locations.service';
-import { Location } from './location';
-
+import { GoogleMapsService } from './googleMaps.service';
+import { Location } from '../../../../shared/location';
 
 @Component({
   selector: 'edit-locations',
   template: require('./editLocations.component.html'),
   directives: [GOOGLE_MAPS_DIRECTIVES],
-  providers: [LocationsService],
+  providers: [GoogleMapsService],
   styles: [
     `
       .sebm-google-map-container {
@@ -51,7 +50,7 @@ export class EditLocations {
   radius: number = 50;
 
   
-  constructor (private _locationsService: LocationsService){}
+  constructor (private _googleMapsService: GoogleMapsService){}
 
   /* Search for the address to fill foundAddresses */
   searchClicked(){
@@ -59,7 +58,7 @@ export class EditLocations {
     this.foundAddresses = [];
 
     /* Fill found addresses with results */
-    this._locationsService.geocode(this.address)
+    this._googleMapsService.geocode(this.address)
     .subscribe(res => {
       let limit = Math.min(this.foundAddressesLimit, res.results.length); 
       for (var n = 0; n < limit; n++){
@@ -83,11 +82,13 @@ export class EditLocations {
 
   /* Submit the location */
   submitLocation() {
-    var newLocation = new Location()
-    newLocation.address = this.chosenAddress;
-    newLocation.lat = this.lat;
-    newLocation.lng = this.lng;
+    var newLocation = new Location;
+    newLocation.name = this.chosenAddress;
+    newLocation.latitude = this.lat;
+    newLocation.longitude = this.lng;
     newLocation.radius = this.radius;
     this.newLoc.emit(newLocation);
   }
 }
+
+
