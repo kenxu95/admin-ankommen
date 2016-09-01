@@ -4,7 +4,12 @@
 
     <!-- PROFILE PIC UPLOADER -->
     <ba-card class="col-md-3" baCardClass="with-scroll">
-      <ba-picture-uploader [picture]="( 'Nasta' | baProfilePicture)" [defaultPicture]="defaultPicture"></ba-picture-uploader>
+      <ba-picture-uploader  
+        [uploaderOptions] = "pictureUploaderOptions"
+        [defaultPicture]="defaultPicture">
+      </ba-picture-uploader>
+
+      <!-- [picture]="( 'Nasta' | baProfilePicture)" -->
     </ba-card>
 
     <ba-card *ngIf="user" id="profile-card-info" class="col-md-9" baCardClass="with-scroll">

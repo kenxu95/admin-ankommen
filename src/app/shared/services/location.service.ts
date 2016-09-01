@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthHttp } from 'angular2-jwt';
-import { API_LOCATIONS_PATH } from './auth-constants';
-import { Location } from './Location';
+import { API_LOCATIONS_PATH } from '../auth-constants';
+import { Location } from '../Location';
 
 @Injectable()
 export class LocationService {

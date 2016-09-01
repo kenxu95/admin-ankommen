@@ -13,10 +13,12 @@ import { IconsService } from '../ui/components/incons/icons.service';
 import { EditLocations } from './components/editLocations';
 
 // import { store } from '../../shared/store';
-import { UserService } from '../../shared/user.service';
-import { LocationService } from '../../shared/location.service';
+import { UserService } from '../../shared/services/user.service';
+import { LocationService } from '../../shared/services/location.service';
 import { User } from '../../shared/user';
 import { Location } from '../../shared/location';
+import 'rxjs/Rx';
+
 
 @Component({
   selector: 'profile',
@@ -38,7 +40,12 @@ export class Profile {
   showEditInfo: boolean = false;
   showEditLocations: boolean = false;
 
+  // Picture upload URL
+  pictureUploaderOptions = {'url': 'http://localhost:8000/api/user/image',
+                            'multiple': true,
+                            'authToken': localStorage.getItem('id_token')}; // authentication
   defaultPicture = 'assets/img/theme/no-photo.png';
+  picture: any = null;
 
   constructor(private _state:AppState,
     private _userService:UserService,
@@ -70,6 +77,17 @@ export class Profile {
           this.initGetLocations(); // Get all locations
         },
         err => console.log(err));
+
+    this._userService.getUserImage()
+      .subscribe(
+        data => {
+          console.log(data.arrayBuffer());
+          // var blob =  new Blob([data], {type: 'image/png'});
+          // var url = window.URL.createObjectURL(blob);
+          // window.open(url);
+        },
+        err => console.log(err)
+      );
   }
 
   ngOnInit() {
