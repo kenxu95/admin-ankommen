@@ -26,7 +26,6 @@ export class BaPictureUploader {
   }
 
   public ngOnInit():void {
-
     if (this._canUploadOnServer()) {
       setTimeout(() => {
         this._uploader.setOptions(this.uploaderOptions);

@@ -42,7 +42,6 @@ export class Profile {
 
   // Picture upload URL
   pictureUploaderOptions = {'url': 'http://localhost:8000/api/user/image',
-                            'multiple': true,
                             'authToken': localStorage.getItem('id_token')}; // authentication
   defaultPicture = 'assets/img/theme/no-photo.png';
   picture: any = null;
@@ -78,17 +77,17 @@ export class Profile {
         },
         err => console.log(err));
 
+
     this._userService.getUserImage()
       .subscribe(
         data => {
-          console.log(data.arrayBuffer());
-          // var blob =  new Blob([data], {type: 'image/png'});
-          // var url = window.URL.createObjectURL(blob);
-          // window.open(url);
+          this.picture = data.json()['img'];
         },
         err => console.log(err)
       );
   }
+
+
 
   ngOnInit() {
     this.initGetUser();
