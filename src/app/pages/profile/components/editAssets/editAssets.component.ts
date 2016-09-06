@@ -2,58 +2,33 @@ import { Component } from '@angular/core';
 import { AppState } from '../../../../app.state';
 
 import { BaCard } from '../../../../theme/components';
-import { BaKameleonPicturePipe } from '../../../../theme/pipes';
-import { IconsService } from '../../../ui/components/incons/icons.service';
 
-import { DisplayAsset } from '../displayAsset';
 import { EditHours } from '../editHours';
+
+import { AssetService } from '../../../../shared/services/asset.service';
+import { Asset } from '../../../../shared/asset';
+import { DomSanitizationService } from '@angular/platform-browser';
 
 @Component({
   selector: 'edit-assets',
   template: require('./editAssets.component.html'),
   styles: [require('../../../ui/components/incons/icons.scss'),
-  `
-  .floating-asset-editor {
-    position: fixed;
-    top: 120px;
-    right: 5px;
-  }
-  `,
-  `
-  .selected {
-    background: yellow !important;
-  }
-
-  img:hover {
-    background: #fffe00 !important;
-  }
-
-  #trash-icon, #add-icon {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-  }
-
-  .floating-asset-display {
-    position: relative;
-  }
-
-  `],
-  pipes: [BaKameleonPicturePipe],
-  directives: [BaCard, DisplayAsset, EditHours],
-  providers: [IconsService]
+           require('./editAssets.component.css')],
+  directives: [BaCard, EditHours],
+  providers: [AssetService]
 })
 
 export class EditAssets {
-  mockUserAssets: string[] = ["Santa", "Medal", "Batman", "Surfer"];
-  myAssetIcons: any;
-  potentialAssetIcons: any;
 
-  selectedAssetIcon: any;
+  selectedAsset: any;
   daysOfWeek: string[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
-  constructor(private _state:AppState,
-    private _iconsService:IconsService){
+  myAssets: Asset[] = [];
+  potentialAssets: Asset[] = [];
+
+  constructor(private _state:AppState, 
+              private _assetService:AssetService,
+              private _sanitizer:DomSanitizationService){
     this._state.notifyDataChanged('notOnMenuTitle', 'Edit Assets'); 
   }
 
@@ -61,40 +36,46 @@ export class EditAssets {
     this._state.notifyDataChanged('notOnMenuTitle', '');
   }
 
+  testPicture : string;
+
+  // Get all the assets
   ngOnInit() {
-    var allIcons = this._iconsService.getAll();
-    this.myAssetIcons = allIcons.kameleonIcons.filter(icon => 
-      this.mockUserAssets.indexOf(icon.name) >= 0);
-    this.potentialAssetIcons = allIcons.kameleonIcons.filter(icon => 
-      this.mockUserAssets.indexOf(icon.name) < 0);
-  } 
+    this._assetService.getAssets()
+        .subscribe(
+          data => {
+            var allAssets = data.json();
+            this.myAssets = allAssets['user'];
+            this.potentialAssets = allAssets['potential'];
+        }, err => console.log(err));
 
-  assetIconClicked(selectedIcon: any, event: any) {
-    event.stopPropagation();
-    this.selectedAssetIcon = selectedIcon;
-  } 
-
-  deselectIcon() {
-    this.selectedAssetIcon = null;
   }
 
-  isMyIcon(icon: any) {
-    if (this.selectedAssetIcon){
-      return this.myAssetIcons.filter(icon => 
-        icon.name == this.selectedAssetIcon.name)[0];
+  assetClicked(clickedAsset: any, event: any) {
+    event.stopPropagation();
+    this.selectedAsset = clickedAsset;
+  } 
+
+  deselectAsset() {
+    this.selectedAsset = null;
+  }
+
+  isMyAsset(icon: any) {
+    if (this.selectedAsset){
+      return this.myAssets.filter(icon => 
+        icon.name == this.selectedAsset.name)[0];
     }
   }
 
-  removeIcon() {
-    var indexRemove = this.myAssetIcons.indexOf(this.selectedAssetIcon);
-    this.myAssetIcons.splice(indexRemove, 1);
-    this.potentialAssetIcons.unshift(this.selectedAssetIcon);
+  removeAsset() {
+    var indexRemove = this.myAssets.indexOf(this.selectedAsset);
+    this.myAssets.splice(indexRemove, 1);
+    this.potentialAssets.unshift(this.selectedAsset);
   }
 
-  addIcon() {
-    var indexRemove = this.potentialAssetIcons.indexOf(this.selectedAssetIcon);  
-    this.potentialAssetIcons.splice(indexRemove, 1);
-    this.myAssetIcons.push(this.selectedAssetIcon);
+  addAsset() {
+    var indexRemove = this.potentialAssets.indexOf(this.selectedAsset);  
+    this.potentialAssets.splice(indexRemove, 1);
+    this.myAssets.push(this.selectedAsset);
   }
   
 }

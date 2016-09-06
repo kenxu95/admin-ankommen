@@ -7,7 +7,7 @@ import { User } from '../User';
 export class UserService {
 
   constructor(private authHttp: AuthHttp) {}
-
+ 
   getUser() {
     return this.authHttp.get(API_USER_PATH);
   }
@@ -19,5 +19,6 @@ export class UserService {
   getUserImage() {
     return this.authHttp.get(API_USER_PATH + "/image");
   }
+  
 
 }

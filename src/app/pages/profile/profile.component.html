@@ -10,15 +10,12 @@
         [picture] = "picture"
         [defaultPicture] = "defaultPicture">
       </ba-picture-uploader>
-
-      <!-- [picture]="( 'Nasta' | baProfilePicture)" -->
     </ba-card>
 
     <ba-card *ngIf="user" id="profile-card-info" class="col-md-9" baCardClass="with-scroll">
       <!-- VIEW INFORMATION  -->
       <div *ngIf="!showEditInfo">
        <i id="profile-edit-info" class="ion-edit" (click)="showEditInfo = true"> </i>
-
        <h4> {{user.name}} </h4>
        <h5> {{user.email}}</h5>
        <p>&nbsp;</p>
@@ -58,9 +55,10 @@
    <i id="profile-edit-assets" class="ion-edit" (click)="navigateToEditAssets()"> </i>
 
    <div class="row clearfix">
-     <div class="kameleon-row" *ngFor="let icon of allIcons">
-      <div class="kameleon-icon with-round-bg {{ icon.color }}">
-      <img src="{{ ( icon.img | baKameleonPicture ) }}"><span>{{ icon.name }}</span></div>
+     <strong *ngIf="userAssets.length == 0"> No Assets! </strong>
+     <div class="kameleon-row" *ngFor="let asset of userAssets">
+      <div class="kameleon-icon with-round-bg {{ asset.color }}">
+      <img src="{{ ( icon.img | baKameleonPicture ) }}"><span>{{ asset.name }}</span></div>
     </div>
   </div>
 

@@ -1,0 +1,24 @@
+  .floating-asset-editor {
+    position: fixed;
+    top: 120px;
+    right: 5px;
+  }
+  `,
+  `
+  .selected {
+    background: yellow !important;
+  }
+
+  img:hover {
+    background: #fffe00 !important;
+  }
+
+  #trash-icon, #add-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+
+  .floating-asset-display {
+    position: relative;
+  }
