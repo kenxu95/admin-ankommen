@@ -11,4 +11,9 @@ export class AssetService {
   getAssets() {
     return this.authHttp.get(API_ASSET_PATH);
   }
+
+  // Params: action - 'add' or 'remove'
+  updateAsset(asset_id: number, action: string) {
+    return this.authHttp.put(API_ASSET_PATH + '/' + asset_id, {'action': action});
+  }
 }

@@ -6,7 +6,7 @@
      <div class="row clearfix">
        <div class="kameleon-row" *ngFor="let asset of myAssets">
         <div class="kameleon-icon with-round-bg {{ green }}" (click)="assetClicked(asset, $event)">
-          <img [src]="asset.dataurl" [class.selected]="selectedAsset === asset">
+          <img [src]="_sanitizer.bypassSecurityTrustUrl(asset.dataurl)" [class.selected]="selectedAsset === asset">
           <span>{{ asset.name }}</span></div>
         </div>
       </div>
@@ -14,7 +14,7 @@
   </div> 
 
   <div class="row">
-   <ba-card title="Potential Assets" class="col-md-6" baCardClass="with-scroll" (click)="deselectedAsset()">
+   <ba-card title="Potential Assets" class="col-md-6" baCardClass="with-scroll" (click)="deselectAsset()">
     <div class="row clearfix">
      <div class="kameleon-row" *ngFor="let asset of potentialAssets">
       <div class="kameleon-icon with-round-bg {{ green }}" (click)="assetClicked(asset, $event)">

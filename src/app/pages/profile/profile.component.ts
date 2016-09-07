@@ -95,7 +95,6 @@ export class Profile {
       .subscribe(
         data => {
           this.picture = data.json()['img'];
-          console.log(this.picture);
         },
         err => console.log(err)
       );

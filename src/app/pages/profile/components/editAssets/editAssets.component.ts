@@ -70,12 +70,20 @@ export class EditAssets {
     var indexRemove = this.myAssets.indexOf(this.selectedAsset);
     this.myAssets.splice(indexRemove, 1);
     this.potentialAssets.unshift(this.selectedAsset);
+
+    // Signal the change to the backend
+    this._assetService.updateAsset(this.selectedAsset.id, 'remove')
+         .subscribe(data => void(0), err => console.log(err));       
   }
 
   addAsset() {
     var indexRemove = this.potentialAssets.indexOf(this.selectedAsset);  
     this.potentialAssets.splice(indexRemove, 1);
     this.myAssets.push(this.selectedAsset);
+
+    // Signal the change to the backend
+    this._assetService.updateAsset(this.selectedAsset.id, 'add')   
+        .subscribe(data => void(0), err => console.log(err));
   }
   
 }
