@@ -20,9 +20,17 @@ import { DomSanitizationService } from '@angular/platform-browser';
 
 export class EditAssets {
 
-  selectedAsset: any;
-  daysOfWeek: string[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  dataOfWeek: any = [
+    {'Day': "Monday", 'TimeRanges': []},
+    {'Day': "Tuesday", 'TimeRanges': []},
+    {'Day': "Wednesday", 'TimeRanges': []},
+    {'Day': "Thursday", 'TimeRanges': []},
+    {'Day': "Friday", 'TimeRanges': []},
+    {'Day': "Saturday", 'TimeRanges': []},
+    {'Day': "Sunday", 'TimeRanges': []},
+  ];
 
+  selectedAsset: any;
   myAssets: Asset[] = [];
   potentialAssets: Asset[] = [];
 
@@ -36,10 +44,8 @@ export class EditAssets {
     this._state.notifyDataChanged('notOnMenuTitle', '');
   }
 
-  testPicture : string;
-
-  // Get all the assets
   ngOnInit() {
+    // Get all the assets
     this._assetService.getAssets()
         .subscribe(
           data => {
@@ -84,6 +90,24 @@ export class EditAssets {
     // Signal the change to the backend
     this._assetService.updateAsset(this.selectedAsset.id, 'add')   
         .subscribe(data => void(0), err => console.log(err));
+  }
+
+  saveAvailability() {
+    let savedTimeRanges = [];
+    for (let data of this.dataOfWeek){
+      if (data['TimeRanges'].length > 0){
+        savedTimeRanges.push({
+          'day': data['Day'],
+          'timeranges': data['TimeRanges']
+        });
+      }
+    }
+   
+    if (savedTimeRanges.length > 0){
+      this._assetService.storeTimeRanges(this.selectedAsset.id, savedTimeRanges)
+          .subscribe(data => void(0), err => console.log(err));      
+    }  
+
   }
   
 }

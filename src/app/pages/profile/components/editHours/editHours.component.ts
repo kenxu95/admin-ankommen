@@ -10,12 +10,14 @@ export class EditHours {
   @Input()
   dayOfWeek: string;
 
+  @Input()
+  timeRanges: any;
+
   private timeChunks = _.range(4); 
   private halfHoursPerChunk = _.range(48 / this.timeChunks.length);
 
 // TIME BAR CODE
   mouseDown: boolean = false;
-  timeRanges: any = [];
   rangeMin: number;
   rangeMax: number;
 
@@ -32,6 +34,10 @@ export class EditHours {
     if (this.checkForDeletion()){
       this.addRange();
     }
+  }
+
+  clearClicked() {
+    this.timeRanges.splice(0, this.timeRanges.length); // Clear the time ranges
   }
 
   private splitRange(i: number){
@@ -142,12 +148,11 @@ export class EditHours {
     this.currentHalfHourHover = -1;
   }
 
-
   private inRange(test: number, min: number, max: number){
     return (test >= min && test <= max);
   }
 
-  isHighlighted(halfHour: number) {
+  isHighlighted(halfHour: number){
     if (this.mouseDown && this.inRange(halfHour, this.rangeMin, this.rangeMax)){
       return true;
     } 
@@ -172,6 +177,7 @@ export class EditHours {
       return "0" + displayHour + ":00";
     return displayHour + ":00";
   }
+
 
 }
 

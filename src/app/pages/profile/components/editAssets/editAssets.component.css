@@ -3,8 +3,7 @@
     top: 120px;
     right: 5px;
   }
-  `,
-  `
+  
   .selected {
     background: yellow !important;
   }
@@ -22,3 +21,13 @@
   .floating-asset-display {
     position: relative;
   }
+
+  #trash-icon, #add-icon {
+    cursor: pointer;
+  }
+
+  .btn-mm{
+    float:right;
+    margin-top: -5px;
+  }
+

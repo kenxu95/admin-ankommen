@@ -30,3 +30,9 @@
   .day-time-display {
     float: right;
   }
+
+  button {
+    float: right;
+    margin-top: 15px;
+    margin-right: -15px;
+  }

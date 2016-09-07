@@ -15,6 +15,7 @@
    [class.highlighted]="isHighlighted(timeChunk * halfHoursPerChunk.length + halfHourOffset)" 
    [style.border-width]="getBorderStyle(timeChunk * halfHoursPerChunk.length + halfHourOffset)">
  </div>
-</div>
+ </div>
+  <button type="button" class="btn btn-default  btn-xs" (click)=clearClicked() >Clear</button>
 </div>
 </div>

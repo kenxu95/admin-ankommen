@@ -51,8 +51,11 @@
 
     <!-- Time selector in the floating menu -->
     <div *ngIf="selectedAsset">
+      <button type="button" class="btn btn-info btn-mm" (click)="saveAvailability()">Save Availability</button>
       <h4> Availability </h4>
-      <edit-hours *ngFor="let dayOfWeek of daysOfWeek" [dayOfWeek]="dayOfWeek"></edit-hours>
+
+      <edit-hours *ngFor="let dayData of dataOfWeek" 
+        [dayOfWeek]="dayData['Day']" [timeRanges]="dayData['TimeRanges']"></edit-hours>
     </div>
 
   </ba-card>
