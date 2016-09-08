@@ -1,64 +1,65 @@
 <div class="widgets">
 
-        <!-- [picture] = "'http://localhost:8000/api/user/image'" -->
+  <!-- [picture] = "'http://localhost:8000/api/user/image'" -->
   <div class="row">
 
     <!-- PROFILE PIC UPLOADER -->
     <ba-card class="col-md-3" baCardClass="with-scroll">
       <ba-picture-uploader
-        [uploaderOptions] = "pictureUploaderOptions"
-        [picture] = "picture"
-        [defaultPicture] = "defaultPicture">
-      </ba-picture-uploader>
-    </ba-card>
+      [uploaderOptions] = "pictureUploaderOptions"
+      [picture] = "picture"
+      [defaultPicture] = "defaultPicture">
+    </ba-picture-uploader>
+  </ba-card>
 
-    <ba-card *ngIf="user" id="profile-card-info" class="col-md-9" baCardClass="with-scroll">
-      <!-- VIEW INFORMATION  -->
-      <div *ngIf="!showEditInfo">
-       <i id="profile-edit-info" class="ion-edit" (click)="showEditInfo = true"> </i>
-       <h4> {{user.name}} </h4>
-       <h5> {{user.email}}</h5>
-       <p>&nbsp;</p>
-       <p *ngIf="user.description.length > 0"> {{user.description}}</p>
-       <p *ngIf="user.description.length == 0"> (No Description)</p>
-
-     </div>
-
-     <!-- EDIT INFO -->
-     <div *ngIf="showEditInfo">
-       <i id="profile-edit-info" class="ion-checkmark" (click)="saveInfo()"> </i>
-
-       <div class="form-group">
-          <label for="name">Name</label>
-          <input [(ngModel)]="user.name" type="text" class="form-control" name="name" >
-       </div>
-
-     <div class="form-group">
-       <label for="email"> Email</label>
-       <input [(ngModel)]="user.email" type="text" class="form-control" name="email" >
-     </div>
-
-     <div class="form-group">
-       <label for="description"> Description </label>
-       <textarea [(ngModel)]="user.description" type="text" class="form-control" name="description"></textarea>
-     </div>   
+  <ba-card *ngIf="user" id="profile-card-info" class="col-md-9" baCardClass="with-scroll">
+    <!-- VIEW INFORMATION  -->
+    <div *ngIf="!showEditInfo">
+     <i id="profile-edit-info" class="ion-edit" (click)="showEditInfo = true"> </i>
+     <h4> {{user.name}} </h4>
+     <h5> {{user.email}}</h5>
+     <p>&nbsp;</p>
+     <p *ngIf="user.description.length > 0"> {{user.description}}</p>
+     <p *ngIf="user.description.length == 0"> (No Description)</p>
 
    </div>
- </ba-card>
+
+   <!-- EDIT INFO -->
+   <div *ngIf="showEditInfo">
+     <i id="profile-edit-info" class="ion-checkmark" (click)="saveInfo()"> </i>
+
+     <div class="form-group">
+      <label for="name">Name</label>
+      <input [(ngModel)]="user.name" type="text" class="form-control" name="name" >
+    </div>
+
+    <div class="form-group">
+     <label for="email"> Email</label>
+     <input [(ngModel)]="user.email" type="text" class="form-control" name="email" >
+   </div>
+
+   <div class="form-group">
+     <label for="description"> Description </label>
+     <textarea [(ngModel)]="user.description" type="text" class="form-control" name="description"></textarea>
+   </div>   
+
+ </div>
+</ba-card>
 </div>
 
 <!-- ASSETS AND LOCATIONS -->
 <div class="row" baCardClass="with-scroll">
 
-<!-- ASSETS -->
- <ba-card id="profile-card-assets" title="Assets" class="col-md-6">
+  <!-- ASSETS -->
+  <ba-card id="profile-card-assets" title="Assets" class="col-md-6">
    <i id="profile-edit-assets" class="ion-edit" (click)="navigateToEditAssets()"> </i>
 
    <div class="row clearfix">
      <strong *ngIf="userAssets.length == 0"> No Assets! </strong>
      <div class="kameleon-row" *ngFor="let asset of userAssets">
-      <div class="kameleon-icon with-round-bg {{ asset.color }}">
-      <img src="{{ ( icon.img | baKameleonPicture ) }}"><span>{{ asset.name }}</span></div>
+      <div class="kameleon-icon with-round-bg {{ green }}">
+        <img [src]="_sanitizer.bypassSecurityTrustUrl(asset.dataurl)"><span>{{ asset.name }}</span>
+      </div>
     </div>
   </div>
 
@@ -66,7 +67,7 @@
 
 <!-- LOCATIONS -->
 <ba-card id="profile-card-locations" title="Locations" class="col-md-6" baCardClass="with-scroll">
-<!-- NOT EDITING LOCATIONS -->
+  <!-- NOT EDITING LOCATIONS -->
   <div *ngIf="!showEditLocations">
     <i id="profile-edit-locations" class="ion-edit" (click)="editLocations()"> </i>
   </div>
@@ -80,7 +81,7 @@
       <strong> {{userLocation.name}} </strong> 
       <div> ( Radius: {{userLocation.radius}} km) </div>
       <i id="profile-delete-location" class="ion-close-round" (click)="removeLocation(userLocation)"></i>
-    <p> &nbsp; </p>
+      <p> &nbsp; </p>
     </div>
   </div>
   <p>&nbsp;</p>

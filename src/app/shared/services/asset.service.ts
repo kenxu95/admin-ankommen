@@ -17,6 +17,10 @@ export class AssetService {
     return this.authHttp.put(API_ASSET_PATH + '/' + asset_id, {'action': action});
   }
 
+  getTimeRanges(asset_id: number) {
+    return this.authHttp.get(API_ASSET_PATH + '/' + asset_id + '/timeranges');
+  }
+
   storeTimeRanges(asset_id: number, data: any) {
     return this.authHttp.post(API_ASSET_PATH + '/' + asset_id + '/timeranges', data);
   }

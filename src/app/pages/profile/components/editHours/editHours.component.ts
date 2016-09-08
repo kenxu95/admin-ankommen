@@ -1,4 +1,4 @@
-import { Component, HostListener, Input} from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 
 @Component({
   selector: 'edit-hours',
@@ -13,7 +13,7 @@ export class EditHours {
   @Input()
   timeRanges: any;
 
-  private timeChunks = _.range(4); 
+  private timeChunks = _.range(6); 
   private halfHoursPerChunk = _.range(48 / this.timeChunks.length);
 
 // TIME BAR CODE
@@ -174,7 +174,7 @@ export class EditHours {
   getTimeLabel(timeChunk: number){
     let displayHour = (timeChunk * this.halfHoursPerChunk.length) / 2;
     if (displayHour < 10)
-      return "0" + displayHour + ":00";
+      return displayHour + ":00";
     return displayHour + ":00";
   }
 

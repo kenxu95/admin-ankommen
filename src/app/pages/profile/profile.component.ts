@@ -2,25 +2,20 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { AppState } from '../../app.state';
 
 import { BaCard } from '../../theme/components';
-// import { BaProfilePicturePipe } from '../../theme/pipes';
 
 import { Router } from '@angular/router';
 
 import { BaPictureUploader } from '../../theme/components';
-import { BaKameleonPicturePipe } from '../../theme/pipes';
-// import { IconsService } from '../ui/components/incons/icons.service';
 
 import { EditLocations } from './components/editLocations';
 
-// import { store } from '../../shared/store';
 import { UserService } from '../../shared/services/user.service';
 import { LocationService } from '../../shared/services/location.service';
 import { AssetService } from '../../shared/services/asset.service';
 import { User } from '../../shared/user';
 import { Asset } from '../../shared/asset';
 import { Location } from '../../shared/location';
-// import 'rxjs/Rx';
-
+import { DomSanitizationService } from '@angular/platform-browser';
 
 @Component({
   selector: 'profile',
@@ -30,7 +25,6 @@ import { Location } from '../../shared/location';
   directives: [BaCard, EditLocations, BaPictureUploader],
   providers: [UserService, LocationService, AssetService],
   encapsulation: ViewEncapsulation.None,
-  pipes: [BaKameleonPicturePipe]
 })
 
 export class Profile {
@@ -49,6 +43,7 @@ export class Profile {
   picture: any = null;
 
   constructor(private _state:AppState,
+    private _sanitizer:DomSanitizationService,
     private _userService:UserService,
     private _locationService:LocationService,
     private _router:Router,
