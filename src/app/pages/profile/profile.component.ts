@@ -66,7 +66,7 @@ export class Profile {
   }
 
   initGetUserAssets() {
-   this._assetService.getAssets()
+   this._assetService.getUserAssets()
      .subscribe(
        data => {
          this.userAssets = data.json()['user'];
@@ -96,7 +96,6 @@ export class Profile {
   }
 
 
-
   ngOnInit() {
     this.initGetUser();
   }
@@ -123,6 +122,7 @@ export class Profile {
       .subscribe(
         data => this.initGetLocations(), // if save is confirmed, refresh locations list
         err => console.log(err));
+    this.closeLocations();
   }
 
   removeLocation(location: Location){
@@ -140,13 +140,6 @@ export class Profile {
     //   console.log(allUsers);
     // });
 
-    // CODE BEFORE
-    // this._userService.getMockUser().then(mockUser => {
-    //   this.mockUser = mockUser;
-
-    //   this.allIcons = this._iconsService.getAll().kameleonIcons.filter(icon =>
-    //     this.mockUser.assets.indexOf(icon.name) >= 0);
-    // });
 
 
 

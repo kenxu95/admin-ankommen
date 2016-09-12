@@ -1,0 +1,67 @@
+<div class="row" baCardClass="with-scroll">
+
+  <ba-card title="Choose Location(s) (required)" class="col-md-6" baCardClass="with-scroll">
+
+    <!-- BEGIN CODE  -->
+    <div *ngFor="let location of selectedLocations">
+      <div id="newtask-display-location"> 
+        <strong> {{location.name}} </strong> 
+        <div> ( Radius: {{location.radius}} km) </div>
+        <i id="newtask-delete-location" class="ion-close-round" (click)="removeLocation(location)"></i>
+        <p> &nbsp; </p>
+      </div>
+    </div>
+
+
+    <form (ngSubmit)="searchClicked()" #addressForm="ngForm">
+      <div class="form-group">
+        <input type='text' class="form-control" 
+        required [(ngModel)]="address" name="address" placeholder="Address" >
+      </div>
+      <button type="submit" class="btn btn-default" 
+      [disabled] ="!addressForm.form.valid"> Search </button>
+    </form>
+
+    <p>&nbsp;</p>
+
+    <div *ngIf="foundAddresses && (foundAddresses.length > 0)">
+      <h4> Matching Addresses </h4>
+      <div class="found-addresses" [class.selected]="chosenAddress == foundAddress.formatted_address"
+      *ngFor="let foundAddress of foundAddresses" (click)="addressClicked(foundAddress)">
+      {{foundAddress.formatted_address}}</div>
+    </div>
+  </ba-card>
+
+
+
+  <ba-card title="Map" class="col-md-6" baCardClass="with-scroll" *ngIf="chosenAddress">
+    <div> 
+
+      <sebm-google-map [latitude]="lat" [longitude]="lng">
+        <sebm-google-map-marker [latitude]="lat" [longitude]="lng">
+         <sebm-google-map-info-window [disableAutoPan]="true">
+          <div id="radius-popup"> Radius: {{radius}} kilometers </div>
+        </sebm-google-map-info-window>
+      </sebm-google-map-marker>
+
+      <sebm-google-map-circle [latitude]="lat" [longitude]="lng"
+      [radius]="radius * 1000" [editable]="true" (radiusChange)="radiusChanged($event)">
+    </sebm-google-map-circle>
+  </sebm-google-map>
+
+  <p>&nbsp;</p>
+  <button type="submit" class="btn btn-default" (click)="submitLocation()">Add Location</button>
+
+</div>
+</ba-card>
+
+</div>
+   <!-- END CODE
+
+
+
+
+
+
+
+    -->

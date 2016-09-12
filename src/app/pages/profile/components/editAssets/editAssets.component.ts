@@ -47,7 +47,7 @@ export class EditAssets {
 
   ngOnInit() {
     // Get all the assets
-    this._assetService.getAssets()
+    this._assetService.getUserAssets()
         .subscribe(
           data => {
             var allAssets = data.json();

@@ -27,6 +27,7 @@ import {TreeView} from './components/components/treeView/treeView.component';
 import {ActiveTasks} from './tasks/components/activetasks/activetasks.component';
 import {Profile} from './profile/profile.component';
 import {EditAssets} from './profile/components/editAssets/editAssets.component';
+import {NewTask} from './tasks/components/newTask/newTask.component';
 
 import { CanActivateViaAuthGuard } from '../shared/auth-guard';
 
@@ -45,7 +46,10 @@ export const PagesRoutes:RouterConfig = [
     path: 'editassets',
     component: EditAssets
   },
-
+  {
+    path: 'newtask',
+    component: NewTask
+  },
   {
     path: 'dashboard',
     component: Dashboard,

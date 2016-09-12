@@ -1,43 +1,22 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { GOOGLE_MAPS_DIRECTIVES } from 'angular2-google-maps/core';
 import { GoogleMapsService } from '../../../../shared/services/googleMaps.service';
 import { Location } from '../../../../shared/location';
+import { BaCard } from '../../../../theme/components';
+
 
 @Component({
   selector: 'edit-locations',
   template: require('./editLocations.component.html'),
-  directives: [GOOGLE_MAPS_DIRECTIVES],
+  directives: [BaCard, GOOGLE_MAPS_DIRECTIVES],
   providers: [GoogleMapsService],
-  styles: [
-    `
-      .sebm-google-map-container {
-        height: 300px;
-      }
-
-      ul {
-        list-style-type: none;
-        margin: 0 0 3px 0;
-      }
-
-      .selected {
-        background-color: black;
-      }
-
-      .found-addresses {
-        cursor: pointer;
-      }
-
-      #radius-popup {
-        color: black;
-      }      
-   ` 
-  ]
+  styles: [require('./editLocations.component.css')]
 })
 
 export class EditLocations {
-  @Output()
-  newLoc = new EventEmitter();
+  @Input()
+  selectedLocations: Location[];
 
   private foundAddressesLimit: number = 5;
 
@@ -87,8 +66,33 @@ export class EditLocations {
     newLocation.latitude = this.lat;
     newLocation.longitude = this.lng;
     newLocation.radius = this.radius;
-    this.newLoc.emit(newLocation);
+    this.selectedLocations.push(newLocation);
+
+    this.reset(); // Reset all fields
+  }
+
+  reset() {
+    this.address = "";
+    this.foundAddresses = [];
+    this.chosenAddress = null;
+    this.radius = 50;
+  }
+
+  removeLocation(location: Location){
+    this.selectedLocations.splice(this.selectedLocations.indexOf(location), 1);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 

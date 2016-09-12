@@ -16,7 +16,7 @@ export class Login {
   public form:FormGroup;
   public email:AbstractControl;
   public password:AbstractControl;
-  public submitted:boolean = false;
+  // public submitted:boolean = false;
 
   constructor(fb:FormBuilder, private http:Http, private router:Router){
     this.form = fb.group({
@@ -30,7 +30,7 @@ export class Login {
   }
 
   public onSubmit(values: any):void {
-    this.submitted = true;
+    // this.submitted = true;
     if (this.form.valid) {
       this.login(values.email, values.password);
     }

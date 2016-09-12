@@ -1,0 +1,7 @@
+  .selected {
+    background: yellow !important;
+  }
+
+  img:hover {
+    background: #fffe00 !important;
+  }

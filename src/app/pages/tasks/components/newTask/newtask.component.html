@@ -1,0 +1,61 @@
+<div class="widgets">
+  <ba-card id="newtasks-location" title="Task Info" class="col-md-12" baCardClass="with-scroll">
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
+      <div class="form-group" [ngClass]="{'has-error': (!name.valid && name.touched), 'has-success': (name.valid && name.touched)}">
+        <label for="name">Name of Task</label>
+        <input [formControl]="name" [(ngModel)]="myTask.name" type="text" class="form-control" name="name" placeholder="Move-out">
+      </div>
+
+      <div class="row">
+       <div class="form-group col-md-3" [ngClass]="{'has-error': (!startdate.valid && startdate.touched), 'has-success': (startdate.valid && startdate.touched)}">
+         <label for="startdate"> Start Date (dd/mm/yy) </label>
+         <input [formControl]="startdate" [(ngModel)]="dateTime" type="text" class="form-control" name="startdate" placeholder="09/07/17">
+       </div>   
+
+       <div class="form-group col-md-3" [ngClass]="{'has-error': (!starttime.valid && starttime.touched), 'has-success': (starttime.valid && starttime.touched)}">
+         <label for="starttime"> Start Time </label>
+         <input [formControl]="starttime" [(ngModel)]="time" type="text" class="form-control" name="starttime" placeholder="14:15">
+       </div>   
+
+       <div class="form-group col-md-3" [ngClass]="{'has-error': (!duration.valid && duration.touched), 'has-success': (duration.valid && duration.touched)}">
+         <label for="duration"> Duration (minutes, hours, days)</label>
+         <input [formControl]="duration" [(ngModel)]="myTask.duration" type="text" class="form-control" name="duration" placeholder="2 hours">
+       </div> 
+    </div>
+
+    <div class="form-group" [ngClass]="{'has-error':(!description.valid && description.touched), 'has-success': (description.valid && description.touched)}">
+     <label for="description"> Description </label>
+     <textarea [formControl]="description" [(ngModel)]="myTask.description" type="text" class="form-control" name="description" placeholder="I need help moving my..."></textarea>
+   </div>  
+
+  <button [disabled]="!form.valid || selectedAssets.length == 0 || selectedLocations.length == 0" 
+          type="submit" class="btn btn-primary">Create New Task</button>
+ </form> 
+</ba-card>
+
+<div class="row" baCardClass="with-scroll">
+ <ba-card title="Choose Task Assets (required)" class="col-md-12" baCardClass="with-scroll">
+   <div class="row clearfix">
+    <div class="kameleon-row" *ngFor="let asset of allAssets">
+      <div class="kameleon-icon with-round-bg {{ green }}" (click)="toggleAssetSelection(asset, $event)">
+        <img [src]="_sanitizer.bypassSecurityTrustUrl(asset.dataurl)" 
+        [class.selected]="selectedAssets.indexOf(asset) >= 0"><span>{{ asset.name }}</span>
+      </div>
+    </div>
+  </div>
+</ba-card>
+
+<edit-locations [selectedLocations]="selectedLocations"> </edit-locations>
+
+
+</div>
+
+
+
+
+
+
+
+
+
