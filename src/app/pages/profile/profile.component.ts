@@ -28,7 +28,6 @@ import { DomSanitizationService } from '@angular/platform-browser';
 })
 
 export class Profile {
-
   user: User;
   userAssets: Asset[] = [];
   userLocations: Location[] = [];

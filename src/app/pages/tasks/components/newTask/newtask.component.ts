@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation} from '@angular/core';
 import { AppState } from '../../../../app.state';
 import { BaCard } from '../../../../theme/components';
 import { Router } from '@angular/router';
-import { EditLocations } from '../editLocations/editLocations.component';
+import { EditLocations } from './components/editLocations/editLocations.component';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { DomSanitizationService } from '@angular/platform-browser';
 
@@ -17,7 +17,7 @@ import { AssetService } from '../../../../shared/services/asset.service';
   selector: 'new-task',
   template: require('./newtask.component.html'),
   styles: [require('../../../ui/components/incons/icons.scss'),
-           require('./newtask.component.css')] 
+           require('./newtask.component.css')],
   directives: [BaCard, EditLocations],
   providers: [AssetService, TaskService],
   encapsulation: ViewEncapsulation.None
@@ -126,6 +126,8 @@ export class NewTask {
       this.selectedAssets.push(asset);
     }
   }
+
+
 }
 
 

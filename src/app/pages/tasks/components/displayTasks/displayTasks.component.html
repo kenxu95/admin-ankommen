@@ -1,0 +1,27 @@
+  <ba-card title="{{taskname}}" class="col-md-12" baCardClass="with-scroll table-panel">
+  <div class="horizontal-scroll">
+    <table class="table table-hover">
+      <thead>
+        <tr class="black-muted-bg">
+          <th class="align-left"><strong> Creator</strong></th>
+          <th class="align-left"><strong>Description</strong></th>
+          <th class="align-left"><strong>Time</strong></th>
+          <th class="align-left"><strong>Duration</strong></th>
+          <th class="align-left"><strong>Needed Assets</strong></th>
+          <th class="align-left"><strong>Location(s)</strong></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of dataArr" class="no-top-border">
+          <td >(Name/Pic)</td>
+          <td class="align-left" >{{data['task']['description']}}</td>
+          <td class="align-left">{{data['task']['date']}} 
+                                 {{data['task']['time']}} </td>
+          <td class="align-left">{{convertDuration(data)}}</td>
+          <td class="align-left"> {{getNeededAssets(data)}}</td>
+          <td class="align-left"> {{getLocations(data)}}</td>
+     </tr>
+   </tbody>
+ </table>        
+</div>
+</ba-card>

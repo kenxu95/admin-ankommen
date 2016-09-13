@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 
 import { GOOGLE_MAPS_DIRECTIVES } from 'angular2-google-maps/core';
-import { GoogleMapsService } from '../../../../shared/services/googleMaps.service';
-import { Location } from '../../../../shared/location';
-import { BaCard } from '../../../../theme/components';
+import { GoogleMapsService } from '../../../../../../shared/services/googleMaps.service';
+import { Location } from '../../../../../../shared/location';
+import { BaCard } from '../../../../../../theme/components';
 
 
 @Component({
