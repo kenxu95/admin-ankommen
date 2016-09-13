@@ -1,51 +1,41 @@
-[![Build Status](https://travis-ci.org/akveo/ng2-admin.svg?branch=master)](https://travis-ci.org/akveo/ng2-admin)
-[![Dependency Status](https://david-dm.org/akveo/ng2-admin.svg)](https://david-dm.org/akveo/ng2-admin)
+# Ankommen: A Social Organizer
 
-# Admin panel framework based on Angular 2, Bootstrap 4 and Webpack
+## Angular 2 Frontend
+Uses the admin template provided by the Akveo team: https://github.com/akveo/ng2-admin
 
-Admin template made with :heart:  by [Akveo team](http://akveo.com/). Follow us on [Twitter](https://twitter.com/akveo_inc) to get latest news about this template first!
+The backend code (in php-laravel) can be found here: https://github.com/kenxu95/ankommen-api2
 
-### Demo
+## Structure
+The most important folders/files:
 
-<a target="_blank" href="http://akveo.com/ng2-admin/"><img src="http://i.imgur.com/QK9AzHj.jpg" width="600" alt="Sky Blue"/></a>
+/config => Contains important configuration information for potential deployment (webpack.common.js, webpack.prod.js, etc)
 
-<a target="_blank" href="http://akveo.com/ng2-admin/">Live Demo</a>
+/src/platform/browser-providers.ts => For defining application-wide providers
 
-## Angular 1.x version
-Here you can find Angular 1.x based version: [Blur Admin](http://akveo.github.io/blur-admin/)
- 
-## Documentation
-Installation, customization and other useful articles: https://akveo.github.io/ng2-admin/
+/src/app/pages => Contains all the major view/component logic and route information. 
 
-## Based on
-Angular 2, Bootstrap 4, Webpack and lots of awesome modules and plugins
+/src/app/shared => Contains all shared class definitions and services 
 
-## How can I support developers?
-- Star our GitHub repo :star:
-- Create pull requests, submit bugs, suggest new features or documentation updates :wrench:
-- Follow us on [Twitter](https://twitter.com/akveo_inc) :feet:
-- Like our page on [Facebook](https://www.facebook.com/akveo/) :thumbsup:
+/src/app/theme => Contains all of the Akveo Team's code for building the template. Should be referenced frequently when creating the views.
 
-## Can I hire you guys?
-Yes!  Visit [our homepage](http://akveo.com/) or simply leave us a note to [contact@akveo.com](mailto:contact@akveo.com). We will be happy to work with you!
+## Authentication
+Uses JSON Web Tokens for authentication, storing the web token in localStorage. 
 
-## Features
-* TypeScript
-* Webpack
-* Responsive layout
-* High resolution
-* Bootstrap 4 CSS Framework
-* Sass
-* Angular 2
-* jQuery
-* Charts (Chartist, Chart.js)
-* Maps (Google, Leaflet, amMap)
-* and many more!
+Uses for authenticated requests: https://github.com/auth0/angular2-jwt
 
-##License
-[MIT](LICENSE.txt) license.
+## Finished URLs
+- /login
+- /register
+- /pages/newtask
+- /pages/profile
+- /pages/editassets
 
-### From akveo
+## Unfinished URLs
+- /pages/tasks/active (integrate with backend)
+- /pages/tasks/potential (integrate with backend)
+- /pages/tasks/previous (integrate with backend)
 
-Enjoy :metal:
-We're always happy to hear your feedback!
+## URLs that have yet to be designed
+- /pages/dashboard (still only akveo's dummy page)
+- /pages/task/{id} (for accepting/rejecting tasks)
+

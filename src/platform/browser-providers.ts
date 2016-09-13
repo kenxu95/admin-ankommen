@@ -14,10 +14,6 @@ import { disableDeprecatedForms, provideForms } from '@angular/forms';
 
 import { routes } from '../app/app.routes';
 
-// TODO: temporary backend that should be removed later
-// import { XHRBackend } from '@angular/http';
-// import { InMemoryBackendService, SEED_DATA } from 'angular2-in-memory-web-api';
-// import { MockTasksDatabase } from '../app/pages/tasks/mocktasksdatabase';
 
 import { GOOGLE_MAPS_PROVIDERS, LazyMapsAPILoaderConfig } from 'angular2-google-maps/core';
 import { AUTH_PROVIDERS } from 'angular2-jwt';
