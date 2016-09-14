@@ -16,6 +16,7 @@ export class ActiveTasks{
   myTasks: any;
   upcomingTasks: any;
 
+  // TODO: Upcoming tasks uses fake data
   ngOnInit(){
     // Get "My Tasks"
     this._taskService.getCreatedTasks()

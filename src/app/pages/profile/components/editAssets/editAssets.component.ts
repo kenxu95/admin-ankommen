@@ -12,14 +12,16 @@ import { DomSanitizationService } from '@angular/platform-browser';
 @Component({
   selector: 'edit-assets',
   template: require('./editAssets.component.html'),
-  styles: [require('../../../ui/components/incons/icons.scss'),
+  styles: [require('../../../../shared/styles/icons.scss'),
            require('./editAssets.component.css')],
   directives: [BaCard, EditHours],
   providers: [AssetService]
 })
 
+// DISPLAY THE EDIT ASSETS PAGE
 export class EditAssets {
 
+  // Keeps track of all updated time ranges per week
   dataOfWeek: any = [
     {'day': "Monday", 'timeRanges': []},
     {'day': "Tuesday", 'timeRanges': []},
@@ -38,6 +40,7 @@ export class EditAssets {
   constructor(private _state:AppState, 
               private _assetService:AssetService,
               private _sanitizer:DomSanitizationService){
+    // Update header title
     this._state.notifyDataChanged('notOnMenuTitle', 'Edit Assets'); 
   }
 
@@ -46,7 +49,7 @@ export class EditAssets {
   }
 
   ngOnInit() {
-    // Get all the assets
+    //  Obtain all assets (both potential and already had)
     this._assetService.getUserAssets()
         .subscribe(
           data => {
@@ -57,6 +60,7 @@ export class EditAssets {
 
   }
 
+  // When an asset's icon is clicked
   assetClicked(clickedAsset: any, event: any) {
     event.stopPropagation();
     this.selectedAsset = clickedAsset;
@@ -90,11 +94,9 @@ export class EditAssets {
     this.selectedAsset = null;
   }
 
+  // Checks whether an asset is selected
   isMyAsset(icon: any) {
-    if (this.selectedAsset){
-      return this.myAssets.filter(icon => 
-        icon.name == this.selectedAsset.name)[0];
-    }
+    return this.myAssets.indexOf(this.selectedAsset) >= 0;
   }
 
   removeAsset() {
@@ -102,7 +104,7 @@ export class EditAssets {
     this.myAssets.splice(indexRemove, 1);
     this.potentialAssets.unshift(this.selectedAsset);
 
-    // Signal the change to the backend
+    // Update the backend
     this._assetService.updateAsset(this.selectedAsset.id, 'remove')
          .subscribe(data => void(0), err => console.log(err));       
   }
@@ -117,6 +119,7 @@ export class EditAssets {
         .subscribe(data => void(0), err => console.log(err));
   }
 
+  // Save all the time ranges to the selected asset
   saveAvailability() {
     this.displaySavedMessage = true;
 

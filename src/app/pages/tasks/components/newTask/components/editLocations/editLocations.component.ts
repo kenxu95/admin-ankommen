@@ -26,7 +26,6 @@ export class EditLocations {
   chosenAddress: string;
   lat: number;
   lng: number;
-  radius: number = 50;
 
   
   constructor (private _googleMapsService: GoogleMapsService){}
@@ -55,9 +54,6 @@ export class EditLocations {
     this.lng = result.geometry.location.lng;
   }
 
-  radiusChanged(newRadius: number){
-    this.radius = Math.round((newRadius / 1000) * 10) / 10; // round to 1 decimal place
-  }
 
   /* Submit the location */
   submitLocation() {
@@ -65,7 +61,6 @@ export class EditLocations {
     newLocation.name = this.chosenAddress;
     newLocation.latitude = this.lat;
     newLocation.longitude = this.lng;
-    newLocation.radius = this.radius;
     this.selectedLocations.push(newLocation);
 
     this.reset(); // Reset all fields
@@ -75,7 +70,6 @@ export class EditLocations {
     this.address = "";
     this.foundAddresses = [];
     this.chosenAddress = null;
-    this.radius = 50;
   }
 
   removeLocation(location: Location){

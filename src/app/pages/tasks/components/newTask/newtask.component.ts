@@ -16,7 +16,7 @@ import { AssetService } from '../../../../shared/services/asset.service';
 @Component({
   selector: 'new-task',
   template: require('./newtask.component.html'),
-  styles: [require('../../../ui/components/incons/icons.scss'),
+  styles: [require('../../../../shared/styles/icons.scss'),
            require('./newtask.component.css')],
   directives: [BaCard, EditLocations],
   providers: [AssetService, TaskService],
@@ -37,7 +37,6 @@ export class NewTask {
   dateTime: string;
   time: string;
 
-
   // TODO: include NUMBER of assets needed
   allAssets: Asset[];
   selectedAssets: Asset[] = [];
@@ -54,11 +53,11 @@ export class NewTask {
     this.form = fb.group({
       'name': ['', Validators.required],
       'startdate': ['', Validators.compose([Validators.required,
-                        Validators.pattern('^[0-9]{2}\/[0-9]{2}\/[0-9]{2}$')])],
+                        Validators.pattern('^[0-9]{2}\/[0-9]{2}\/[0-9]{2}$')])], // dd/mm/yy
       'starttime': ['', Validators.compose([Validators.required,
-                        Validators.pattern('^[0-9]{2}:[0-9]{2}$')])],
+                        Validators.pattern('^[0-9]{2}:[0-9]{2}$')])], // hh:mm
       'duration': ['', Validators.compose([Validators.required,
-                       Validators.pattern('^[0-9]* (days?|hours?|days?)$')])],
+                       Validators.pattern('^[0-9]* (days?|hours?|days?)$')])], //number minute(s)/hour(s)/day(s)
       'description': ['', Validators.required]
     });
 
@@ -119,11 +118,9 @@ export class NewTask {
 
     let selectedIndex = this.selectedAssets.indexOf(asset);
     if (selectedIndex >= 0){
-      // Unhighlight
-      this.selectedAssets.splice(selectedIndex, 1);
+      this.selectedAssets.splice(selectedIndex, 1); // De-highlight
     }else{
-      // Highlight
-      this.selectedAssets.push(asset);
+      this.selectedAssets.push(asset); // Highlight
     }
   }
 

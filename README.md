@@ -23,6 +23,14 @@ Uses JSON Web Tokens for authentication, storing the web token in localStorage.
 
 Uses for authenticated requests: https://github.com/auth0/angular2-jwt
 
+## TODO:
+- Upgrade to HTTPS when logging-in/registering
+- Store JWT Token in cookie instead of localstorage
+- Handle invalid login's more gracefully
+- Performance issue when scrolling with asset images and google maps on the same page (/pages/newtask)
+- Color issue when "New Task" menu item is clicked
+
+
 ## Finished URLs
 - /login
 - /register

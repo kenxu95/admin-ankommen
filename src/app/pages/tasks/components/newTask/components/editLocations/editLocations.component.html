@@ -39,14 +39,7 @@
 
       <sebm-google-map [latitude]="lat" [longitude]="lng">
         <sebm-google-map-marker [latitude]="lat" [longitude]="lng">
-         <sebm-google-map-info-window [disableAutoPan]="true">
-          <div id="radius-popup"> Radius: {{radius}} kilometers </div>
-        </sebm-google-map-info-window>
       </sebm-google-map-marker>
-
-      <sebm-google-map-circle [latitude]="lat" [longitude]="lng"
-      [radius]="radius * 1000" [editable]="true" (radiusChange)="radiusChanged($event)">
-    </sebm-google-map-circle>
   </sebm-google-map>
 
   <p>&nbsp;</p>

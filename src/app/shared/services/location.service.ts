@@ -3,6 +3,7 @@ import { AuthHttp } from 'angular2-jwt';
 import { API_LOCATIONS_PATH } from '../auth-constants';
 import { Location } from '../Location';
 
+// Communicates with the backend's LocationController
 @Injectable()
 export class LocationService {
 

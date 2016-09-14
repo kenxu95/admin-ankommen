@@ -12,6 +12,7 @@ export class PreviousTasks{
   myPreviousTasks: any;
   previousTasks: any;
 
+  // TODO: CURRENTLY FAKE DATA
   ngOnInit(){
     this.myPreviousTasks = [
     this.paramsToData('I need help eating spoiled food', '02/02/16', '12:30', '125',

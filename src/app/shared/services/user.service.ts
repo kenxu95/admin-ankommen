@@ -3,6 +3,7 @@ import { AuthHttp } from 'angular2-jwt';
 import { API_USER_PATH } from '../auth-constants';
 import { User } from '../User';
 
+// Communicates with backend UserController
 @Injectable()
 export class UserService {
 

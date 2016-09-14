@@ -7,49 +7,25 @@ import { Location } from '../../../../shared/location';
 @Component({
   selector: 'edit-locations',
   template: require('./editLocations.component.html'),
+  styles: [require('./editLocations.component.css')],
   directives: [GOOGLE_MAPS_DIRECTIVES],
-  providers: [GoogleMapsService],
-  styles: [
-    `
-      .sebm-google-map-container {
-        height: 300px;
-      }
-
-      ul {
-        list-style-type: none;
-        margin: 0 0 3px 0;
-      }
-
-      .selected {
-        background-color: black;
-      }
-
-      .found-addresses {
-        cursor: pointer;
-      }
-
-      #radius-popup {
-        color: black;
-      }      
-   ` 
-  ]
+  providers: [GoogleMapsService]
 })
 
 export class EditLocations {
   @Output()
-  newLoc = new EventEmitter();
+  newLoc = new EventEmitter(); // Emit the new selected location back to the parent
 
   private foundAddressesLimit: number = 5;
 
-  address: string = "";
-  foundAddresses: any[];
+  address: string = ""; // Current search bar value
+  foundAddresses: any[]; // List of addresses found by google
 
   chosenAddress: string;
   lat: number;
   lng: number;
-  radius: number = 50;
+  radius: number = 50; // Default radius
 
-  
   constructor (private _googleMapsService: GoogleMapsService){}
 
   /* Search for the address to fill foundAddresses */

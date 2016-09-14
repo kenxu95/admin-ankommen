@@ -15,8 +15,6 @@ export class AppState {
 
   /* When the value of a field changes */
   notifyDataChanged(event, value) {
-    // console.log("notifyDataChanged: " + value);
-
     let current = this._data[event]; //current --> {title: "Dashboard"} 
     if (current != value) {
       this._data[event] = value;
@@ -31,8 +29,6 @@ export class AppState {
 
   /* Subscribers stores all the callbacks - adds a callback to the subscription list  */
   subscribe(event:string, callback:Function) {
-    // console.log("subscribe: " + event);
-
     var subscribers = this._subscriptions.get(event) || [];
     subscribers.push(callback);
 
@@ -47,10 +43,6 @@ export class AppState {
 
   /* Every time the data is updated, this event is called to execute all the callbacks */
   _onEvent(data:any) {
-    // console.log("onEvent: " + data['event']);
-
-    /* (example) --> data: {'event': 'menu.activeLink',  'data': {title: "Dashboard"} } */
-
     var subscribers = this._subscriptions.get(data['event']) || [];
 
     /* All the callbacks are executed */

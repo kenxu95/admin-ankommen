@@ -7,6 +7,7 @@ export class CanActivateViaAuthGuard implements CanActivate {
 
   constructor(private router: Router) {}
 
+  // Decides whether we can access a particular route
   canActivate() {
     if (tokenNotExpired())
       return true;

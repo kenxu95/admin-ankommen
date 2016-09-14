@@ -5,7 +5,7 @@ import { Location } from '../location';
 import { Asset } from '../asset';
 import { Task } from '../task';
 
-
+// Communicates with backend's TaskController
 @Injectable()
 export class TaskService {
 

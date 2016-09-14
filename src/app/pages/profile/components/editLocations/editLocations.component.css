@@ -1,0 +1,20 @@
+      .sebm-google-map-container {
+        height: 300px;
+      }
+
+      ul {
+        list-style-type: none;
+        margin: 0 0 3px 0;
+      }
+
+      .selected {
+        background-color: black;
+      }
+
+      .found-addresses {
+        cursor: pointer;
+      }
+
+      #radius-popup {
+        color: black;
+      }  

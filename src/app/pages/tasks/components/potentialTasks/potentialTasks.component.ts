@@ -11,6 +11,7 @@ import { DisplayTasks } from '../displayTasks/displayTasks.component';
 export class PotentialTasks{
   requestedTasks: any;
 
+  // TODO: CURRENTLY FAKE DATA
   ngOnInit(){
     this.requestedTasks = [
     this.paramsToData('I need help reading again', '08/25/17', '20:30', '30',

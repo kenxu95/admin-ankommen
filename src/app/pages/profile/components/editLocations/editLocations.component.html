@@ -1,4 +1,4 @@
-<!-- BEGIN CODE  -->
+BEGIN CODE  -->
 <h3> Search for a new location </h3>
 <form (ngSubmit)="searchClicked()" #addressForm="ngForm">
 
@@ -19,9 +19,8 @@
   {{foundAddress.formatted_address}}</div>
 </div>
 
-
+<!-- Display the map -->
 <div *ngIf="chosenAddress">
-
   <sebm-google-map [latitude]="lat" [longitude]="lng">
     <sebm-google-map-marker [latitude]="lat" [longitude]="lng">
      <sebm-google-map-info-window [disableAutoPan]="true">
@@ -40,4 +39,4 @@
 
 </div>
 
-   <!-- END CODE -->
+   <!-- END CODE

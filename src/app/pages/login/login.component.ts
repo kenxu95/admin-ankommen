@@ -4,6 +4,8 @@ import { LOGIN_POST_PATH } from '../../shared/auth-constants';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
 
+// DISPLAYS LOGIN PAGE
+
 @Component({
   selector: 'login',
   encapsulation: ViewEncapsulation.None,
@@ -16,7 +18,6 @@ export class Login {
   public form:FormGroup;
   public email:AbstractControl;
   public password:AbstractControl;
-  // public submitted:boolean = false;
 
   constructor(fb:FormBuilder, private http:Http, private router:Router){
     this.form = fb.group({
@@ -29,28 +30,28 @@ export class Login {
 
   }
 
+  // Called when form is submitted
   public onSubmit(values: any):void {
-    // this.submitted = true;
     if (this.form.valid) {
       this.login(values.email, values.password);
     }
   }
 
+  // Submits login request
+  // TODO: USE HTTPS
+  // TODO: Store the JWT token in cookie instead of local storage
+  // TODO: Handle invalid requests gracefully
   private login(email: string, password: string){
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
 
-    // TODO: USE HTTPS
-    // TODO: Store token in cookies instead of local storage?
     this.http.post(LOGIN_POST_PATH, JSON.stringify({email: email, password: password}), options)
     .subscribe(
       data => {
         if (data.status == 200){
           // Store the JWT token so auth_http() can find it
           localStorage.setItem('id_token', data.json().token);
-
-          // Route to dashboard
-          this.router.navigate(['/pages/dashboard']);
+          this.router.navigate(['/pages/dashboard']); //Route to dashboard
         }
       },
       err => console.log(err));

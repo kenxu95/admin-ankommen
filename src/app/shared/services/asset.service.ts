@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AuthHttp } from 'angular2-jwt';
 import { API_ASSET_PATH } from '../auth-constants';
 
+// Communicates with the backend's AssetController
 @Injectable()
 export class AssetService {
 

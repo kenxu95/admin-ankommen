@@ -45,8 +45,6 @@ export const APPLICATION_PROVIDERS = [
     config.apiKey = 'AIzaSyB1pb7Ppr6s5xroLDrvrj24jK1pHiib4Pk'; //TODO: store secretly
     return config;
   }}
-  // { provide: XHRBackend, useClass: InMemoryBackendService }, //TODO REMOVE: in-mem server
-  // { provide: SEED_DATA, useClass: MockTasksDatabase } // TODO REMOVE: in-mem server data
 ];
 
 export const PROVIDERS = [
