@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { TaskService } from '../../../../shared/services/task.service';
-import { DisplayTasks } from '../displayTasks/displayTasks.component';
+import { DisplayTasks } from '../components/displayTasks/displayTasks.component';
 
 @Component({
   selector: 'active-tasks',
@@ -53,12 +53,13 @@ export class ActiveTasks{
 
     return {
       'task': {
+        'title': 'Title of task',
         'description': description,
         'date': date,
         'time': time,
-        'duration': duration
+        'duration': duration,
+        'taskassets': taskassetsArr
       },
-      'taskassets': taskassetsArr,
       'locations': locationsArr
     } 
   }

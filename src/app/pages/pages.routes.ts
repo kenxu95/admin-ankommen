@@ -8,6 +8,7 @@ import { PreviousTasks } from './tasks/components/previousTasks/previousTasks.co
 import { Profile } from './profile/profile.component';
 import { EditAssets } from './profile/components/editAssets/editAssets.component';
 import { NewTask } from './tasks/components/newTask/newTask.component';
+import { TaskDescription } from './tasks/components/taskDescription/taskDescription.component';
 
 import { CanActivateViaAuthGuard } from '../shared/auth-guard';
 
@@ -88,6 +89,10 @@ export const PagesRoutes:RouterConfig = [
   {
     path: 'editassets',
     component: EditAssets
+  },
+  {
+    path: 'task/:id',
+    component: TaskDescription
   }
   ]}];
 

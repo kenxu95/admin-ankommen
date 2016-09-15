@@ -3,7 +3,7 @@
     <table class="table table-hover">
       <thead>
         <tr class="black-muted-bg">
-          <th class="align-left"><strong> Creator</strong></th>
+          <th class="align-left"><strong>Title</strong></th>
           <th class="align-left"><strong>Description</strong></th>
           <th class="align-left"><strong>Time</strong></th>
           <th class="align-left"><strong>Duration</strong></th>
@@ -13,13 +13,13 @@
       </thead>
       <tbody>
         <tr *ngFor="let data of dataArr" class="no-top-border">
-          <td >(Name/Pic)</td>
+          <td class="align-left">{{data['task']['name']}}</td>
           <td class="align-left" >{{data['task']['description']}}</td>
           <td class="align-left">{{data['task']['date']}} 
                                  {{data['task']['time']}} </td>
           <td class="align-left">{{convertDuration(data)}}</td>
-          <td class="align-left"> {{getNeededAssets(data)}}</td>
-          <td class="align-left"> {{getLocations(data)}}</td>
+          <td class="align-left"> {{convertAssets(data)}}</td>
+          <td class="align-left"> {{convertLocations(data)}}</td>
      </tr>
    </tbody>
  </table>        

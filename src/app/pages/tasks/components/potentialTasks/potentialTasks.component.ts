@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { DisplayTasks } from '../displayTasks/displayTasks.component';
+import { DisplayTasks } from '../components/displayTasks/displayTasks.component';
 
 @Component({
   selector: 'potential-tasks',
@@ -34,12 +34,13 @@ export class PotentialTasks{
 
     return {
       'task': {
+        'title': 'Title of task',
         'description': description,
         'date': date,
         'time': time,
-        'duration': duration
+        'duration': duration,
+        'taskassets': taskassetsArr
       },
-      'taskassets': taskassetsArr,
       'locations': locationsArr
     } 
   }

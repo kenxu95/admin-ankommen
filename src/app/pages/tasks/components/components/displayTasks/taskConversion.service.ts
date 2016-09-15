@@ -1,22 +1,9 @@
-import { Component, Input } from '@angular/core';
-import { BaCard } from '../../../../theme/components';
+import { Injectable } from '@angular/core';
 
+@Injectable()
+export class TaskConversionService {
 
-@Component({
-  selector: 'display-tasks',
-  template: require('./displayTasks.component.html'),
-  directives: [BaCard]
-})
-
-export class DisplayTasks {
-  @Input()
-  taskname: string;
-
-  @Input()
-  dataArr: any;
-
-  // Convert duration from number of minutes to a string
-  convertDuration(data: any){
+  durationToStr(data: any){
     var numMinutes = Number(data['task']['duration']);
     var str = "";
 
@@ -41,20 +28,19 @@ export class DisplayTasks {
       str += numMinutes.toString() + ' minute';
       str += (numMinutes > 1) ? 's ': ' ';
     }
-    return str;       
+    return str;  
   }
 
-  // Get the needed asset as a string
-  getNeededAssets(data: any){
+  assetsToStr(data: any){
     var str = '';
-    for (let taskasset of data['taskassets']){
+
+    for (let taskasset of data['task']['taskassets']){
       str += taskasset['name'] + " (" + taskasset['needed'] + ")\n ";
     }
     return str; 
   }
 
-  // Get the location address as a string
-  getLocations(data: any){
+  locationsToStr(data: any){
     var str = '';
     for (let location of data['locations']){
       str += location['name'].slice(0, 20) + "..."; // Limit the length
@@ -62,15 +48,5 @@ export class DisplayTasks {
     }
     return str;
   }
+
 }
-
-
-
-
-
-
-
-
-
-
-
