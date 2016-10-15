@@ -24,6 +24,8 @@ Uses JSON Web Tokens for authentication, storing the web token in localStorage.
 Uses for authenticated requests: https://github.com/auth0/angular2-jwt
 
 ## TODO:
+- Fix the bug that causes the google maps to disappear (because of breaking changes to angular2 final release)
+- Fix the active route guard (because of breaking changes to angular2 final release)
 - Upgrade to HTTPS when logging-in/registering
 - Store JWT Token in cookie instead of localstorage
 - Handle invalid login's more gracefully
@@ -39,7 +41,7 @@ Uses for authenticated requests: https://github.com/auth0/angular2-jwt
 - /pages/editassets
 
 ## Unfinished URLs
-- /pages/tasks/active (integrate with backend)
+- /pages/tasks/active (finish integrating with backend)
 - /pages/tasks/potential (integrate with backend)
 - /pages/tasks/previous (integrate with backend)
 

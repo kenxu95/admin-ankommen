@@ -11,17 +11,21 @@ export class TaskService {
 
   constructor(private authHttp: AuthHttp) {}
 
-  getCreatedTasks(){
+  getMyTasks(){
     return this.authHttp.get(API_TASK_PATH + '/created');
   }
 
-  storeTask(task: Task, assets: Asset[], needed: number[], locations: Location[]){
-    return this.authHttp.post(API_TASK_PATH, {
+  storeMyTask(task: Task, assets: Asset[], needed: number[], locations: Location[]){
+    return this.authHttp.post(API_TASK_PATH + '/created', {
       'task': task,
       'assets': assets,
       'needed': needed,
       'locations': locations
     });
+  }
+
+  getPreviousTasks(){
+    return this.authHttp.get(API_TASK_PATH + '/previous');
   }
    
 }

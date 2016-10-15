@@ -88,15 +88,3 @@ export class BaPictureUploader {
     return !!this.uploaderOptions['url'];
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-

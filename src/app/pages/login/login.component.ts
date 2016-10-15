@@ -1,5 +1,6 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import {Component, ViewEncapsulation} from '@angular/core';
+import {FormGroup, AbstractControl, FormBuilder, Validators} from '@angular/forms';
+
 import { LOGIN_POST_PATH } from '../../shared/auth-constants';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
@@ -9,7 +10,6 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'login',
   encapsulation: ViewEncapsulation.None,
-  directives: [],
   styles: [require('./login.scss')],
   template: require('./login.html'),
 })
@@ -57,6 +57,7 @@ export class Login {
       err => console.log(err));
   }
 }
+
 
 
 

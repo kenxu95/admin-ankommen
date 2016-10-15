@@ -1,0 +1,13 @@
+<ba-card *ngIf="data" title="{{data['task']['name']}}" class="col-md-12" baCardClass="with-scroll">
+<h5> {{data['task']['date']}}  {{data['task']['time']}} {{convertDuration(data)}}</h5>
+
+<p> &nbsp; </p>
+<p> {{data['task']['description']}} </p>
+<p> &nbsp; </p>
+
+<h5> NEEDED ASSETS </h5>
+
+
+
+
+</ba-card> 

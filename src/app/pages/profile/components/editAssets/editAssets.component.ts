@@ -1,20 +1,14 @@
 import { Component } from '@angular/core';
-import { AppState } from '../../../../app.state';
-
-import { BaCard } from '../../../../theme/components';
-
-import { EditHours } from '../editHours';
 
 import { AssetService } from '../../../../shared/services/asset.service';
 import { Asset } from '../../../../shared/asset';
-import { DomSanitizationService } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'edit-assets',
   template: require('./editAssets.component.html'),
   styles: [require('../../../../shared/styles/icons.scss'),
            require('./editAssets.component.css')],
-  directives: [BaCard, EditHours],
   providers: [AssetService]
 })
 
@@ -37,15 +31,9 @@ export class EditAssets {
   potentialAssets: Asset[] = [];
   displaySavedMessage: boolean = false;
 
-  constructor(private _state:AppState, 
-              private _assetService:AssetService,
-              private _sanitizer:DomSanitizationService){
-    // Update header title
-    this._state.notifyDataChanged('notOnMenuTitle', 'Edit Assets'); 
-  }
-
-  ngOnDestroy() {
-    this._state.notifyDataChanged('notOnMenuTitle', '');
+  constructor(
+    private _assetService:AssetService,
+    private _sanitizer:DomSanitizer){
   }
 
   ngOnInit() {

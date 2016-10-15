@@ -1,6 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
-import { GOOGLE_MAPS_DIRECTIVES } from 'angular2-google-maps/core';
 import { GoogleMapsService } from '../../../../shared/services/googleMaps.service';
 import { Location } from '../../../../shared/location';
 
@@ -8,7 +7,6 @@ import { Location } from '../../../../shared/location';
   selector: 'edit-locations',
   template: require('./editLocations.component.html'),
   styles: [require('./editLocations.component.css')],
-  directives: [GOOGLE_MAPS_DIRECTIVES],
   providers: [GoogleMapsService]
 })
 

@@ -6,7 +6,7 @@ group: Customization
 template: article.jade
 ---
 
-Project structure is originally based on [Angular2 Webpack Starter](https://github.com/AngularClass/angular2-webpack-starter#file-structure). We made some changes we thought would be better in our particular case.
+The project structure is originally based on [Angular2 Webpack Starter](https://github.com/AngularClass/angular2-webpack-starter#file-structure). We made some changes we thought would be better in our particular case.
 
 The directory structure of this template is as follows:
 
@@ -53,9 +53,8 @@ ng2-admin/
    ├──tslint.json                * typescript lint config
    ├──typedoc.json               * typescript documentation generator
    ├──tsconfig.json              * config that webpack uses for typescript
-   ├──typings.json               * our typings manager
-   ├──package.json               * what npm uses to manage it's dependencies
-   ├──bower.json                 * DEPRECATED - moving to npm as primary package manager for all dependenties
-   └──.bowerrc                   * DEPRECARD - temporary bower configuration
+   └──package.json               * what npm uses to manage it's dependencies
 ```
-In our template we tried to separate theme layer and presentation layer. We believe most of other templates have them combined. That's why when you start developing using them, it gets very hard for you to remove things you don't need.
+In our template we tried to separate the theme layer and presentation layer. We believe most of other templates 
+have them combined. That's why when you start developing using them, it gets very hard for you to remove things you 
+don't need.
