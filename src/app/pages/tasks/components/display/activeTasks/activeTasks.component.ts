@@ -4,7 +4,7 @@ import { TaskService } from '../../../../../shared/services/task.service';
 
 @Component({
   selector: 'active-tasks',
-  template: require('./activetasks.component.html'),
+  template: require('./activeTasks.component.html'),
   providers: [TaskService]
 })
 
