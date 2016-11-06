@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthHttp } from 'angular2-jwt';
 import { API_USER_PATH } from '../auth-constants';
-import { User } from '../User';
+import { User } from '../user';
 
 // Communicates with backend UserController
 @Injectable()

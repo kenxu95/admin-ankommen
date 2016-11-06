@@ -1,4 +1,4 @@
-export class Location {
+export class Area {
   id: number;
   name: string;
   longitude: number;

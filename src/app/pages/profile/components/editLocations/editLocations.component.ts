@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
 import { GoogleMapsService } from '../../../../shared/services/googleMaps.service';
-import { Location } from '../../../../shared/location';
+import { Area } from '../../../../shared/area';
 
 @Component({
   selector: 'edit-locations',
@@ -56,7 +56,7 @@ export class EditLocations {
 
   /* Submit the location */
   submitLocation() {
-    var newLocation = new Location;
+    var newLocation = new Area;
     newLocation.name = this.chosenAddress;
     newLocation.latitude = this.lat;
     newLocation.longitude = this.lng;

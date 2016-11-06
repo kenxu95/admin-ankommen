@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation} from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import { Task, Asset, Location } from '../../../../../shared';
+import { Task, Asset, Area } from '../../../../../shared';
 import { AssetService, TaskService } from '../../../../../shared/services';
 
 @Component({
@@ -32,7 +32,7 @@ export class NewTask {
   allAssets: Asset[];
   selectedAssets: Asset[] = [];
 
-  selectedLocations: Location[] = [];
+  selectedLocations: Area[] = [];
 
   constructor(fb:FormBuilder, 
               private _assetService:AssetService,

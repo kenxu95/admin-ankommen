@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 // SHARED FOLDER
 import { UserService, LocationService, AssetService } from '../../../../shared/services';
-import { User, Asset, Location } from '../../../../shared';
+import { User, Asset, Area } from '../../../../shared';
 
 // For making sure we trust dataurls recieved
 import { DomSanitizer } from '@angular/platform-browser';
@@ -20,7 +20,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class ViewProfile {
   user: User;
   userAssets: Asset[] = [];
-  userLocations: Location[] = [];
+  userLocations: Area[] = [];
 
   // Flags deciding whether editing should be displayed
   showEditInfo: boolean = false;
@@ -102,7 +102,7 @@ export class ViewProfile {
     this.showEditLocations = false;
   }
 
-  saveLocation(location: Location){
+  saveLocation(location: Area){
     this._locationService.storeLocation(location)
       .subscribe(
         data => this.initGetLocations(), // if save is confirmed, refresh locations list
@@ -110,7 +110,7 @@ export class ViewProfile {
     this.closeLocations();
   }
 
-  removeLocation(location: Location){
+  removeLocation(location: Area){
     this._locationService.destroyLocation(location.id)
       .subscribe(
         data => this.initGetLocations(), // if remove is confirmed, refresh locations list

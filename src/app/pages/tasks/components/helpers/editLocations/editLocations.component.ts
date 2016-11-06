@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Location } from '../../../../../shared';
+import { Area } from '../../../../../shared';
 import { GoogleMapsService } from '../../../../../shared/services';
 
 @Component({
@@ -11,7 +11,7 @@ import { GoogleMapsService } from '../../../../../shared/services';
 
 export class EditLocations {
   @Input()
-  selectedLocations: Location[];
+  selectedLocations: Area[];
 
   private foundAddressesLimit: number = 5;
 
@@ -52,7 +52,7 @@ export class EditLocations {
 
   /* Submit the location */
   submitLocation() {
-    var newLocation = new Location;
+    var newLocation = new Area;
     newLocation.name = this.chosenAddress;
     newLocation.latitude = this.lat;
     newLocation.longitude = this.lng;
@@ -67,7 +67,7 @@ export class EditLocations {
     this.chosenAddress = null;
   }
 
-  removeLocation(location: Location){
+  removeLocation(location: Area){
     this.selectedLocations.splice(this.selectedLocations.indexOf(location), 1);
   }
 }

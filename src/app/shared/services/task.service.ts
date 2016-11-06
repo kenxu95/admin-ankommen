@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthHttp } from 'angular2-jwt';
 import { API_TASK_PATH } from '../auth-constants';
-import { Location } from '../location';
+import { Area } from '../area';
 import { Asset } from '../asset';
 import { Task } from '../task';
 
@@ -15,7 +15,7 @@ export class TaskService {
     return this.authHttp.get(API_TASK_PATH + '/created');
   }
 
-  storeMyTask(task: Task, assets: Asset[], needed: number[], locations: Location[]){
+  storeMyTask(task: Task, assets: Asset[], needed: number[], locations: Area[]){
     return this.authHttp.post(API_TASK_PATH + '/created', {
       'task': task,
       'assets': assets,
